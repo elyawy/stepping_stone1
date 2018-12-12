@@ -10,6 +10,7 @@ int main() {
         std::getline(std::cin, line);
         i.lexer(line);
     } while (line != "`");
+    std::cout << "jello";
     return 0;
 }
 
