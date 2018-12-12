@@ -1,7 +1,5 @@
 #include <iostream>
-
 #include "super-header.h"
-
 #include "vector"
 
 //load script file using lexer function and then parse using parser function.
