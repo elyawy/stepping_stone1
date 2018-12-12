@@ -7,10 +7,14 @@
 
 
 #include <string>
+#include <map>
+#include <vector>
+
 
 class Interpreter {
 private:
-
+std::map<std::string, double > symblTable;
+std::vector<std::string> toParse;
 
 public:
 
