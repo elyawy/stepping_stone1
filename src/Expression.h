@@ -6,7 +6,7 @@
 #define STEPPING_STONE1_EXPRESSION_H
 
 
-class expression {
+class Expression {
 
 };
 
