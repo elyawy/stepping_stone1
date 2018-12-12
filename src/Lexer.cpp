@@ -4,6 +4,8 @@
 
 #include "Lexer.h"
 
-std::string *Lexer::readScript() {
-    return nullptr;
+std::vector<std::string> Lexer::readScript() {
+
+
+    return text;
 }

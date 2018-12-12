@@ -7,10 +7,13 @@
 
 
 #include <string>
+#include <vector>
 
 class Lexer {
+private:
+    std::vector<std::string> text;
 public:
-    std::string * readScript();
+    std::vector<std::string>  readScript();
 
 };
 
