@@ -3,4 +3,4 @@ project(stepping_stone1)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(stepping_stone1 main.cpp)
+add_executable(stepping_stone1 main.cpp Command.h Expression.h super-header.h)
