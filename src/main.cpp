@@ -5,11 +5,11 @@
 //load script file using lexer function and then parse using parser function.
 int main() {
     std::string line;
-    std::getline(std::cin,line);
     Interpreter i;
-    i.lexer(line);
-
-
+    do {
+        std::getline(std::cin, line);
+        i.lexer(line);
+    } while (line != "`");
     return 0;
 }
 
