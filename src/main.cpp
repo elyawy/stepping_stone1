@@ -4,6 +4,7 @@
 
 //load script file using lexer function and then parse using parser function.
 int main() {
+    std::cout << "ehlo";
     std::string line;
     Interpreter i;
     do {
