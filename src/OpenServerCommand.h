@@ -9,8 +9,13 @@
 #include "Command.h"
 
 
-class OpenServerCommand : public Command{
-    void execute(std::string command);
+class OpenServerCommand:public Command{
+private:
+    int x;
+public:
+    void execute() override;
+
+    ~OpenServerCommand() override;
 };
 
 

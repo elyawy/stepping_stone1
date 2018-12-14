@@ -4,6 +4,13 @@
 
 #include "OpenServerCommand.h"
 
-void OpenServerCommand::execute(std::string command) {
+void OpenServerCommand::execute() {
+int x  = 0;
+}
+
+OpenServerCommand::~OpenServerCommand() {
 
 }
+
+
+
