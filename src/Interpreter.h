@@ -9,11 +9,12 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "Command.h"
 
 
 class Interpreter {
 private:
-std::map<std::string, double > symblTable;
+std::map<std::string, Command> symblTable;
 std::vector<std::string> toParse;
 
 public:

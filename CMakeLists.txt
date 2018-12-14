@@ -3,4 +3,4 @@ project(stepping_stone1)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(stepping_stone1 src/main.cpp src/Command.h src/Expression.h src/super-header.h src/Interpreter.h src/Interpreter.cpp src/OpenServerCommand.cpp src/OpenServerCommand.h)
+add_executable(stepping_stone1 src/main.cpp src/Command.h src/Expression.h src/super-header.h src/Interpreter.h src/Interpreter.cpp src/OpenServerCommand.cpp src/OpenServerCommand.h src/Number.cpp src/Number.h)

@@ -7,7 +7,7 @@
 
 
 class Expression {
-
+    virtual double calculate() = 0;
 };
 
 
