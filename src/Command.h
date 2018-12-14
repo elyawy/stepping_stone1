@@ -6,8 +6,7 @@
 #define STEPPING_STONE1_COMMAND_H
 
 
-class Command {
-
+class Command {int i = 0;
 };
 
 
