@@ -3,3 +3,11 @@
 //
 
 #include "Number.h"
+
+Number::Number(double number) {
+    this->num = number;
+}
+
+double Number::calculate() {
+    return this->num;
+}

@@ -1,0 +1,14 @@
+//
+// Created by ziv_t on 12/14/18.
+//
+
+#ifndef STEPPING_STONE1_BINARYEXPRESSION_H
+#define STEPPING_STONE1_BINARYEXPRESSION_H
+
+
+class BinaryExpression {
+
+};
+
+
+#endif //STEPPING_STONE1_BINARYEXPRESSION_H

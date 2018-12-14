@@ -5,9 +5,15 @@
 #ifndef STEPPING_STONE1_NUMBER_H
 #define STEPPING_STONE1_NUMBER_H
 
+#include "Expression.h"
 
-class Number {
 
+class Number : public Expression{
+private:
+    double num;
+public:
+    Number(double number);
+    double calculate();
 };
 
 
