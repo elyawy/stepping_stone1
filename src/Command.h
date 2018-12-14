@@ -7,7 +7,6 @@
 
 
 class Command {
-    virtual void execute(std::string) = 0;
 };
 
 
