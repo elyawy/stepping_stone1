@@ -17,7 +17,5 @@ void Interpreter::lexer(std::string& line) {
 }
 
 void Interpreter::parser() {
-    while (!toParse.empty()) {
-        if ()
-    }
+
 }
