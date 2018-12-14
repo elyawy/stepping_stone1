@@ -1,0 +1,14 @@
+//
+// Created by ziv_t on 12/14/18.
+//
+
+#ifndef STEPPING_STONE1_OPENSERVERCOMMAND_H
+#define STEPPING_STONE1_OPENSERVERCOMMAND_H
+
+
+class OpenServerCommand {
+
+};
+
+
+#endif //STEPPING_STONE1_OPENSERVERCOMMAND_H
