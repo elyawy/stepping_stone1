@@ -13,7 +13,8 @@ private:
     double num;
 public:
     Number(double number);
-    double calculate();
+    virtual double calculate();
+    double getNum();
 };
 
 

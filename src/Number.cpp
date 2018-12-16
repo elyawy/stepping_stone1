@@ -11,3 +11,9 @@ Number::Number(double number) {
 double Number::calculate() {
     return this->num;
 }
+
+double Number::getNum() {
+    return this->num;
+}
+
+

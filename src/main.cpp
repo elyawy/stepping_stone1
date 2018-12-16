@@ -1,6 +1,9 @@
 #include <iostream>
 #include "super-header.h"
 #include "vector"
+#include "Expression.h"
+#include "Number.h"
+#include "Plus.h"
 
 //load script file using lexer function and then parse using parser function.
 int main() {
