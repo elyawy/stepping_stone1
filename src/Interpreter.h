@@ -10,11 +10,13 @@
 #include <map>
 #include <vector>
 #include "Command.h"
+#include "Expression.h"
 
 
 class Interpreter {
 private:
 std::map<std::string, Command> symblTable;
+std::map<std::string, Expression*> ExpressTable;
 std::vector<std::string> toParse;
 
 public:

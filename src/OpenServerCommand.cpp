@@ -8,9 +8,4 @@ void OpenServerCommand::execute() {
 int x  = 0;
 }
 
-OpenServerCommand::~OpenServerCommand() {
-
-}
-
-
-
+OpenServerCommand::~OpenServerCommand() = default;
