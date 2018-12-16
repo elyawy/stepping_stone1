@@ -23,4 +23,15 @@ void Interpreter::parser() {
     }
 }
 
+Interpreter::Interpreter() {
+
+    CommandTable.emplace("var", 3);
+    CommandTable.emplace("openDataServer", 2);
+    CommandTable.emplace("connect", 2);
+    CommandTable.emplace("while", 4);
+    CommandTable.emplace("print", 1);
+    CommandTable.emplace("sleep", 1);
+
+}
+
 
