@@ -10,10 +10,8 @@
 
 
 class OpenServerCommand:public Command{
-private:
-    int x;
 public:
-    void execute() override;
+    void execute(std::vector<std::string>::iterator &iter) override;
 
     ~OpenServerCommand() override;
 };

@@ -4,8 +4,7 @@
 
 #include "OpenServerCommand.h"
 
-void OpenServerCommand::execute() {
-int x  = 0;
+void OpenServerCommand::execute(std::vector<std::string>::iterator &iter) {
 }
 
 OpenServerCommand::~OpenServerCommand() = default;

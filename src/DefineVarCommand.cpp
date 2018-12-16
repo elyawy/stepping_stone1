@@ -4,12 +4,11 @@
 
 #include "DefineVarCommand.h"
 
-void DefineVarCommand::execute() {
+void DefineVarCommand::execute(std::vector<std::string>::iterator &iter) {
 
 
 }
 
-DefineVarCommand::DefineVarCommand(int x, int y) {
-}
+
 
 DefineVarCommand::~DefineVarCommand() = default;

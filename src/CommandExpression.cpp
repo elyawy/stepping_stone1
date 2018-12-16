@@ -5,7 +5,7 @@
 #include "CommandExpression.h"
 
 double CommandExpression::calculate() {
-    command->execute();
+//    command->execute();
 }
 
 CommandExpression::~CommandExpression() = default;

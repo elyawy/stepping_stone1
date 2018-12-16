@@ -13,9 +13,8 @@ class DefineVarCommand: public Command {
 private:
     std::string var;
 public:
-    void execute() override;
+    void execute(std::vector<std::string>::iterator &iter) override;
 
-    DefineVarCommand(int x, int y);
     ~DefineVarCommand() override;
 
 

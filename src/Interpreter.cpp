@@ -4,6 +4,11 @@
 
 #include "Interpreter.h"
 #include "DefineVarCommand.h"
+#include "OpenServerCommand.h"
+#include "whileCommand.h"
+#include "printCommand.h"
+#include "sleepCommand.h"
+#include "ConnectServerCommand.h"
 #include <sstream>
 
 
@@ -18,19 +23,20 @@ void Interpreter::lexer(std::string& line) {
 }
 
 void Interpreter::parser() {
-    while(!toParse.empty()){
-        toParse.pop_back();
+    std::vector<std::string>::iterator iter;
+    for (iter = toParse.begin(); iter != toParse.end(); iter++){
+        CommandTable[*iter]->execute(iter);
     }
 }
 
-Interpreter::Interpreter() {
+Interpreter::Interpreter(){
 
-    CommandTable.emplace("var", 3);
-    CommandTable.emplace("openDataServer", 2);
-    CommandTable.emplace("connect", 2);
-    CommandTable.emplace("while", 4);
-    CommandTable.emplace("print", 1);
-    CommandTable.emplace("sleep", 1);
+    CommandTable.emplace("var", new DefineVarCommand);
+    CommandTable.emplace("openDataServer", new OpenServerCommand);
+    CommandTable.emplace("connect", new ConnectServerCommand);
+    CommandTable.emplace("while", new whileCommand);
+    CommandTable.emplace("print", new printCommand);
+    CommandTable.emplace("sleep", new sleepCommand);
 
 }
 
