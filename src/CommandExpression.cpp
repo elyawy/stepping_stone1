@@ -6,6 +6,7 @@
 
 double CommandExpression::calculate() {
 //    command->execute();
+//need to find a way to send iterator, before we can enable method.
 }
 
 CommandExpression::~CommandExpression() = default;
