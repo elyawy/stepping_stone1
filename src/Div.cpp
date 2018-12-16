@@ -1,0 +1,21 @@
+//
+// Created by ziv_t on 12/16/18.
+//
+
+#include <stdexcept>
+#include "Div.h"
+
+Div::Div(Expression *left, Expression *right) : BinaryExpression(left, right) {}
+
+Div::Div(double left, Expression *right) : BinaryExpression(left, right) {}
+
+Div::Div(Expression *left, double right) : BinaryExpression(left, right){}
+
+Div::Div(double left, double right) : BinaryExpression(left, right) {}
+
+double Div::calculate() {
+    if (this->getRightExp()->calculate() == 0) {
+        throw std::domain_error("Cant Divide by 0");
+    }
+    return this->getLeftExp()->calculate() / this->getRightExp()->calculate();
+}
