@@ -7,8 +7,11 @@
 
 
 class Command {
-
+public:
+    virtual void execute(){}
+    virtual ~Command(){}
 };
+
 
 
 #endif //STEPPING_STONE1_COMMAND_H
