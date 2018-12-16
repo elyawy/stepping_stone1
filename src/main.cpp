@@ -3,11 +3,10 @@
 #include "vector"
 #include "test.h"
 #include "ExpTest.h"
+#include "Number.h"
 
 //load script file using lexer function and then parse using parser function.
 int main() {
-    test* e = new ExpTest;
-    e->run();
     std::string line;
     Interpreter i;
     do {

@@ -12,8 +12,8 @@ class Number : public Expression{
 private:
     double num;
 public:
-    Number(double number);
-    virtual double calculate();
+    explicit Number(double number);
+    double calculate() override;
     double getNum();
 };
 

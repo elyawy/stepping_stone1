@@ -17,7 +17,7 @@ public:
     BinaryExpression(double left, Expression* right);
     BinaryExpression(Expression* left, double right);
     BinaryExpression(double left, double right);
-    virtual double calculate() = 0;
+    double calculate() override = 0;
     Expression* getLeftExp();
     Expression* getRightExp();
 };
