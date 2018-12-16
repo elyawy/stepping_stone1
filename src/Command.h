@@ -9,7 +9,7 @@
 class Command {
 public:
     virtual void execute(){}
-    virtual ~Command(){}
+    virtual ~Command() = default;
 };
 
 

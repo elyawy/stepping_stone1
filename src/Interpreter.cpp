@@ -3,6 +3,7 @@
 //
 
 #include "Interpreter.h"
+#include "DefineVarCommand.h"
 #include <sstream>
 
 
@@ -17,5 +18,9 @@ void Interpreter::lexer(std::string& line) {
 }
 
 void Interpreter::parser() {
-
+    while(!toParse.empty()){
+        toParse.pop_back();
+    }
 }
+
+

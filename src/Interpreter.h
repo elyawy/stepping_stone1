@@ -15,11 +15,13 @@
 
 class Interpreter {
 private:
-std::map<std::string, Command> symblTable;
+std::map<std::string, Expression*> symblTable;
 std::map<std::string, Expression*> ExpressTable;
+std::map<std::string, Command*> CommandTable;
 std::vector<std::string> toParse;
 
 public:
+
 
 void lexer(std::string & line);
 
