@@ -16,7 +16,7 @@ public:
     Plus(double left, Expression* right);
     Plus(Expression* left, double right);
     Plus(double left, double right);
-    double calculate();
+    double calculate() override;
 };
 
 
