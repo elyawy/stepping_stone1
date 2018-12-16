@@ -8,9 +8,6 @@
 #include "BinaryExpression.h"
 
 class Plus :public BinaryExpression{
-private:
-    Expression* leftExp;
-    Expression* rightExp;
 public:
     Plus(Expression* left, Expression* right);
     Plus(double left, Expression* right);

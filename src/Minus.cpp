@@ -13,5 +13,5 @@ Minus::Minus(Expression *left, double right) : BinaryExpression(left, right) {}
 Minus::Minus(double left, double right) : BinaryExpression(left, right) {}
 
 double Minus::calculate() {
-    return this->leftExp - this->rightExp;
+    return this->getLeftExp()->calculate() - this->getRightExp()->calculate();
 }

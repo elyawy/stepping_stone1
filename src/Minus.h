@@ -8,9 +8,6 @@
 #include "BinaryExpression.h"
 
 class Minus : public BinaryExpression {
-private:
-    Expression* leftExp;
-    Expression* rightExp;
 public:
     Minus(Expression* left, Expression* right);
     Minus(double left, Expression* right);
