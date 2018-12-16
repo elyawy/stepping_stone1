@@ -1,12 +1,13 @@
 #include <iostream>
 #include "super-header.h"
 #include "vector"
-#include "Expression.h"
-#include "Number.h"
-#include "Plus.h"
+#include "test.h"
+#include "ExpTest.h"
 
 //load script file using lexer function and then parse using parser function.
 int main() {
+    test* e = new ExpTest;
+    e->run();
     std::string line;
     Interpreter i;
     do {
