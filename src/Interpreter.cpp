@@ -3,13 +3,13 @@
 //
 
 #include "Interpreter.h"
-#include "DefineVarCommand.h"
-#include "OpenServerCommand.h"
-#include "whileCommand.h"
-#include "printCommand.h"
-#include "sleepCommand.h"
-#include "ConnectServerCommand.h"
-#include <sstream>
+
+std::map<std::string, Command*> CommandTable = {{"var", new DefineVarCommand},
+                                                {"openDataServer", new OpenServerCommand},
+                                                {"connect", new ConnectServerCommand},
+                                                {"while", new whileCommand},
+                                                {"print", new printCommand},
+                                                {"sleep", new sleepCommand}};
 
 
 void Interpreter::lexer(std::string& line) {
@@ -29,19 +29,18 @@ void Interpreter::parser() {
     }
 }
 
-Interpreter::Interpreter(){
 
-    CommandTable.emplace("var", new DefineVarCommand);
-    CommandTable.emplace("openDataServer", new OpenServerCommand);
-    CommandTable.emplace("connect", new ConnectServerCommand);
-    CommandTable.emplace("while", new whileCommand);
-    CommandTable.emplace("print", new printCommand);
-    CommandTable.emplace("sleep", new sleepCommand);
-
-}
 
 std::map<std::string, Command *> Interpreter::getCommands() {
     return CommandTable;
 }
+
+Interpreter::Interpreter() {
+    std::map<std::string, Command * >::iterator iter;
+    for (iter = CommandTable.begin(); iter != CommandTable.end(); iter++){
+        (*iter).second->addSymblMapPointer(this->symblTable);
+    }
+}
+
 
 

@@ -7,3 +7,7 @@
 void sleepCommand::execute(std::vector<std::string>::iterator &iter) {
 
 }
+
+void sleepCommand::addSymblMapPointer(std::map<std::string, double> &symblTable) {
+    Command::addSymblMapPointer(symblTable);
+}

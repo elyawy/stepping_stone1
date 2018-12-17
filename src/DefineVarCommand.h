@@ -17,6 +17,7 @@ public:
 
     ~DefineVarCommand() override;
 
+    void addSymblMapPointer(std::map<std::string, double> &symblTable) override;
 
 };
 

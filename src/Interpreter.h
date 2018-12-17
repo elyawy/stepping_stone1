@@ -11,26 +11,33 @@
 #include <vector>
 #include "Command.h"
 #include "Expression.h"
+#include "DefineVarCommand.h"
+#include "OpenServerCommand.h"
+#include "whileCommand.h"
+#include "printCommand.h"
+#include "sleepCommand.h"
+#include "ConnectServerCommand.h"
+#include <sstream>
+
 
 
 class Interpreter {
 private:
+
 std::map<std::string, double> symblTable;
 std::map<std::string, Expression*> ExpressTable;
-std::map<std::string, Command*> CommandTable;
 std::vector<std::string> toParse;
 
 public:
 
     Interpreter();
 
+
 void lexer(std::string & line);
 
 void parser();
 
     std::map<std::string, Command*> getCommands();
-
-
 
 };
 

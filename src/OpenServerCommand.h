@@ -14,6 +14,8 @@ public:
     void execute(std::vector<std::string>::iterator &iter) override;
 
     ~OpenServerCommand() override;
+
+    void addSymblMapPointer(std::map<std::string, double> &symblTable) override;
 };
 
 

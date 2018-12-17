@@ -13,6 +13,7 @@ int main() {
     do {
         std::getline(std::cin, line);
         i.lexer(line);
+        i.parser();
     } while (line != "`");
     return 0;
 }
