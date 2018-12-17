@@ -13,7 +13,7 @@ private:
     double num;
 public:
     explicit Number(double number);
-    double calculate() override;
+    double calculate(std::vector<std::string>::iterator &iter) override;
     double getNum();
 };
 

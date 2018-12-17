@@ -12,6 +12,6 @@ Minus::Minus(Expression *left, double right) : BinaryExpression(left, right) {}
 
 Minus::Minus(double left, double right) : BinaryExpression(left, right) {}
 
-double Minus::calculate() {
-    return this->getLeftExp()->calculate() - this->getRightExp()->calculate();
+double Minus::calculate(std::vector<std::string>::iterator &iter) {
+    return this->getLeftExp()->calculate(iter) - this->getRightExp()->calculate(iter);
 }

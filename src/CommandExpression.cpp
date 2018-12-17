@@ -4,7 +4,7 @@
 
 #include "CommandExpression.h"
 
-double CommandExpression::calculate() {
+double CommandExpression::calculate(std::vector<std::string>::iterator &iter) {
 //    command->execute();
 //need to find a way to send iterator, before we can enable method.
 }

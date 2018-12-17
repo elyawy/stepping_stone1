@@ -40,4 +40,8 @@ Interpreter::Interpreter(){
 
 }
 
+std::map<std::string, Command *> Interpreter::getCommands() {
+    return CommandTable;
+}
+
 

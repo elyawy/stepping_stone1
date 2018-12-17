@@ -17,7 +17,7 @@ private:
 public:
     explicit CommandExpression(Command *command);
 
-    double calculate() override;
+    double calculate(std::vector<std::string>::iterator &iter) override;
 
     ~CommandExpression() override;
 

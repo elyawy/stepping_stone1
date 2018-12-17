@@ -13,7 +13,7 @@ public:
     Plus(double left, Expression* right);
     Plus(Expression* left, double right);
     Plus(double left, double right);
-    double calculate() override;
+    double calculate(std::vector<std::string>::iterator &iter) override;
 };
 
 

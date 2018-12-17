@@ -12,6 +12,6 @@ Mul::Mul(Expression *left, double right) : BinaryExpression(left, right) {}
 
 Mul::Mul(double left, double right) : BinaryExpression(left, right) {}
 
-double Mul::calculate() {
-    return this->getLeftExp()->calculate() * this->getRightExp()->calculate();
+double Mul::calculate(std::vector<std::string>::iterator &iter) {
+    return this->getLeftExp()->calculate(iter) * this->getRightExp()->calculate(iter);
 }

@@ -13,9 +13,9 @@ Div::Div(Expression *left, double right) : BinaryExpression(left, right){}
 
 Div::Div(double left, double right) : BinaryExpression(left, right) {}
 
-double Div::calculate() {
-    if (this->getRightExp()->calculate() == 0) {
+double Div::calculate(std::vector<std::string>::iterator &iter) {
+    if (this->getRightExp()->calculate(iter) == 0) {
         throw std::domain_error("Cant Divide by 0");
     }
-    return this->getLeftExp()->calculate() / this->getRightExp()->calculate();
+    return this->getLeftExp()->calculate(iter) / this->getRightExp()->calculate(iter);
 }
