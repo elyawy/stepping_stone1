@@ -11,7 +11,7 @@ iter++;
 if ((*iter) == "=") {
     iter++;
     double b = stoi(*iter);
-    symblTable->emplace(a, b);
+    mapH.getsymblTable()->emplace(a, b);
 //    iter++;
 //    if ((*iter) == "bind") {
 //        iter++;
@@ -20,8 +20,8 @@ if ((*iter) == "=") {
 
 }
 
-void DefineVarCommand::addSymblMapPointer(std::map<std::string, double> &symblTable1) {
-    symblTable = &symblTable1;
+void DefineVarCommand::addMaps(mapHandler &mapHandler1) {
+    mapH = mapHandler1;
 }
 
 

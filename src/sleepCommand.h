@@ -12,7 +12,7 @@ class sleepCommand: public Command {
 public:
     void execute(std::vector<std::string>::iterator &iter) override;
 
-    void addSymblMapPointer(std::map<std::string, double> &symblTable) override;
+    void addMaps(mapHandler &mapHandler1) override;
 
 };
 

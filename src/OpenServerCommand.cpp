@@ -80,8 +80,8 @@ void OpenServerCommand::execute(std::vector<std::string>::iterator &iter) {
 
 }
 
-void OpenServerCommand::addSymblMapPointer(std::map<std::string, double> &symblTable1) {
-    symblTable = &symblTable1;
+void OpenServerCommand::addMaps(mapHandler &mapHandler1) {
+    mapH = mapHandler1;
 }
 
 OpenServerCommand::~OpenServerCommand() = default;

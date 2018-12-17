@@ -15,7 +15,7 @@ public:
 
     ~OpenServerCommand() override;
 
-    void addSymblMapPointer(std::map<std::string, double> &symblTable) override;
+    void addMaps(mapHandler &mapHandler1) override;
 };
 
 

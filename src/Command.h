@@ -9,15 +9,17 @@
 #include <string>
 #include <vector>
 #include <map>
+#include "mapHandler.h"
 
 class Command {
+protected:
+    mapHandler mapH;
 public:
-    std::map<std::string, double>* symblTable;
 
     virtual void execute(std::vector<std::string>::iterator &iter){}
     virtual ~Command() = default;
 
-    virtual void addSymblMapPointer(std::map<std::string, double> &symblTable){}
+    virtual void addMaps(mapHandler &mapHandler1){}
 };
 
 

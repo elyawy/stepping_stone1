@@ -26,6 +26,6 @@ void whileCommand::execute(std::vector<std::string>::iterator &iter) {
 
 }
 
-void whileCommand::addSymblMapPointer(std::map<std::string, double> &symblTable) {
-    Command::addSymblMapPointer(symblTable);
+void whileCommand::addMaps(mapHandler &mapHandler1) {
+    mapH = mapHandler1;
 }

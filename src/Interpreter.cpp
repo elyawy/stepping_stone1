@@ -18,15 +18,12 @@ void Interpreter::lexer(std::string& line) {
 }
 
 void Interpreter::parser() {
-
     std::vector<std::string>::iterator iter;
 
     for (iter = toParse.begin(); iter != toParse.end(); iter++){
         CommandTable[*iter]->execute(iter);
     }
-    while(!toParse.empty()){
-        toParse.pop_back();
-    }
+    while(!toParse.empty()) toParse.pop_back();
 }
 
 
@@ -36,10 +33,15 @@ std::map<std::string, Command *> Interpreter::getCommands() {
 }
 
 Interpreter::Interpreter() {
+    mapH.setSymbleMap(symblTable);
+    mapH.setbindtovarMap(bindtoVarTable);
+    mapH.setbindtovarMap(vartoBindTable);
     std::map<std::string, Command * >::iterator iter;
     for (iter = CommandTable.begin(); iter != CommandTable.end(); iter++){
-        (*iter).second->addSymblMapPointer(this->symblTable);
+        (*iter).second->addMaps(this->mapH);
     }
+
+
 }
 
 

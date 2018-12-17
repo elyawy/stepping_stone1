@@ -17,6 +17,7 @@
 #include "printCommand.h"
 #include "sleepCommand.h"
 #include "ConnectServerCommand.h"
+#include "mapHandler.h"
 #include <sstream>
 
 
@@ -34,7 +35,7 @@ std::map<std::string, Command*> CommandTable = {{"var", new DefineVarCommand},
                                                 {"sleep", new sleepCommand}};
 std::map<std::string, Expression*> ExpressTable;
 std::vector<std::string> toParse;
-int parseState = 0;
+mapHandler mapH;
 
 public:
 

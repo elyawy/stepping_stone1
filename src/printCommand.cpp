@@ -10,9 +10,9 @@ void printCommand::execute(std::vector<std::string>::iterator &iter) {
 
     iter++;
 
-    if (symblTable->count(*iter) > 0 ){
+    if (mapH.getsymblTable()->count(*iter) > 0 ){
 
-        std::cout << symblTable->at(*iter) << std::endl;
+        std::cout << mapH.getsymblTable()->at(*iter) << std::endl;
     }
 
     if ((*iter)[0] == '\"') {
@@ -31,6 +31,6 @@ void printCommand::execute(std::vector<std::string>::iterator &iter) {
     }
 }
 
-void printCommand::addSymblMapPointer(std::map<std::string, double> &symblTable1) {
-    symblTable = &symblTable1;
+void printCommand::addMaps(mapHandler &mapHandler1) {
+    mapH = mapHandler1;
 }

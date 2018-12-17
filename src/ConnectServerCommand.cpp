@@ -8,6 +8,6 @@ void ConnectServerCommand::execute(std::vector<std::string>::iterator &iter) {
 
 }
 
-void ConnectServerCommand::addSymblMapPointer(std::map<std::string, double> &symblTable) {
-
+void ConnectServerCommand::addMaps(mapHandler &mapHandler1) {
+ mapH =mapHandler1;
 }
