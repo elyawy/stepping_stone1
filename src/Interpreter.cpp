@@ -4,12 +4,7 @@
 
 #include "Interpreter.h"
 
-std::map<std::string, Command*> CommandTable = {{"var", new DefineVarCommand},
-                                                {"openDataServer", new OpenServerCommand},
-                                                {"connect", new ConnectServerCommand},
-                                                {"while", new whileCommand},
-                                                {"print", new printCommand},
-                                                {"sleep", new sleepCommand}};
+
 
 
 void Interpreter::lexer(std::string& line) {
@@ -23,9 +18,14 @@ void Interpreter::lexer(std::string& line) {
 }
 
 void Interpreter::parser() {
+
     std::vector<std::string>::iterator iter;
+
     for (iter = toParse.begin(); iter != toParse.end(); iter++){
         CommandTable[*iter]->execute(iter);
+    }
+    while(!toParse.empty()){
+        toParse.pop_back();
     }
 }
 

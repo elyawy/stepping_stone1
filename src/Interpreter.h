@@ -23,10 +23,18 @@
 
 class Interpreter {
 private:
-
 std::map<std::string, double> symblTable;
+std::map<std::string, std::string> vartoBindTable;
+std::map<std::string, std::string> bindtoVarTable;
+std::map<std::string, Command*> CommandTable = {{"var", new DefineVarCommand},
+                                                {"openDataServer", new OpenServerCommand},
+                                                {"connect", new ConnectServerCommand},
+                                                {"while", new whileCommand},
+                                                {"print", new printCommand},
+                                                {"sleep", new sleepCommand}};
 std::map<std::string, Expression*> ExpressTable;
 std::vector<std::string> toParse;
+int parseState = 0;
 
 public:
 

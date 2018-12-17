@@ -4,9 +4,9 @@
 
 #include <iostream>
 #include "printCommand.h"
+#include <algorithm>
 
 void printCommand::execute(std::vector<std::string>::iterator &iter) {
-    Interpreter l;
 
     iter++;
 
@@ -18,16 +18,17 @@ void printCommand::execute(std::vector<std::string>::iterator &iter) {
     if ((*iter)[0] == '\"') {
         do {
             if ((*iter)[(*iter).size()-1] == '\"') {
-                std::cout << *iter;
+                (*iter).erase(std::remove((*iter).begin(),(*iter).end(), '\"'), (*iter).end());
+                std::cout << (*iter);
                 break;
             }
-            std::cout << *iter;
+            (*iter).erase(std::remove((*iter).begin(),(*iter).end(), '\"'), (*iter).end());
+            std::cout << *iter << " ";
             iter++;
 
         } while (!(*iter).empty());
         std::cout << std::endl;
     }
-
 }
 
 void printCommand::addSymblMapPointer(std::map<std::string, double> &symblTable1) {

@@ -12,6 +12,7 @@ int main() {
     Interpreter i;
     do {
         std::getline(std::cin, line);
+        if(line == "`") break;
         i.lexer(line);
         i.parser();
     } while (line != "`");

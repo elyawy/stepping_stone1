@@ -7,7 +7,6 @@
 
 
 #include "Command.h"
-#include "Interpreter.h"
 
 
 class printCommand: public Command {

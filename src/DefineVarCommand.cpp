@@ -5,12 +5,23 @@
 #include "DefineVarCommand.h"
 
 void DefineVarCommand::execute(std::vector<std::string>::iterator &iter) {
-
+iter++;
+std::string a = (*iter);
+iter++;
+if ((*iter) == "=") {
+    iter++;
+    double b = stoi(*iter);
+    symblTable->emplace(a, b);
+//    iter++;
+//    if ((*iter) == "bind") {
+//        iter++;
+//    }
+}
 
 }
 
-void DefineVarCommand::addSymblMapPointer(std::map<std::string, double> &symblTable) {
-    Command::addSymblMapPointer(symblTable);
+void DefineVarCommand::addSymblMapPointer(std::map<std::string, double> &symblTable1) {
+    symblTable = &symblTable1;
 }
 
 

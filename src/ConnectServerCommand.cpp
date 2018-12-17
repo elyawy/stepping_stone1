@@ -9,5 +9,5 @@ void ConnectServerCommand::execute(std::vector<std::string>::iterator &iter) {
 }
 
 void ConnectServerCommand::addSymblMapPointer(std::map<std::string, double> &symblTable) {
-    Command::addSymblMapPointer(symblTable);
+
 }

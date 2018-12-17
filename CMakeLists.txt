@@ -11,4 +11,4 @@ add_executable(stepping_stone1 src/main.cpp src/Command.h src/Expression.h
         src/Mul.h src/Div.cpp src/Div.h src/test.h src/ExpTest.cpp
         src/ExpTest.h src/CommandExpression.cpp src/CommandExpression.h
         src/DefineVarCommand.cpp src/DefineVarCommand.h src/whileCommand.cpp
-        src/whileCommand.h src/printCommand.cpp src/printCommand.h src/sleepCommand.cpp src/sleepCommand.h src/ConnectServerCommand.cpp src/ConnectServerCommand.h)
+        src/whileCommand.h src/printCommand.cpp src/printCommand.h src/sleepCommand.cpp src/sleepCommand.h src/ConnectServerCommand.cpp src/ConnectServerCommand.h src/mapHandler.cpp src/mapHandler.h)
