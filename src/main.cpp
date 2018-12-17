@@ -4,6 +4,7 @@
 #include "test.h"
 #include "ExpTest.h"
 #include "Number.h"
+#include "OpenServerCommand.h"
 
 //load script file using lexer function and then parse using parser function.
 int main() {
@@ -15,4 +16,3 @@ int main() {
     } while (line != "`");
     return 0;
 }
-
