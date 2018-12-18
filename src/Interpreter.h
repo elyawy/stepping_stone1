@@ -6,22 +6,20 @@
 #define STEPPING_STONE1_INTERPRETER_H
 
 
-#include <string>
-#include <map>
-#include <vector>
+#include "Lexer.h"
+#include "Parser.h"
 #include "Command.h"
 #include "Expression.h"
 #include "DefineVarCommand.h"
 #include "OpenServerCommand.h"
+#include "ConnectServerCommand.h"
 #include "whileCommand.h"
 #include "printCommand.h"
 #include "sleepCommand.h"
-#include "ConnectServerCommand.h"
-#include "mapHandler.h"
 #include "bindCommand.h"
-#include <sstream>
-
-
+#include <string>
+#include <map>
+#include <vector>
 
 class Interpreter {
 private:
@@ -35,9 +33,12 @@ std::map<std::string, Command*> CommandTable = {{"var", new DefineVarCommand},
                                                 {"print", new printCommand},
                                                 {"sleep", new sleepCommand},
                                                 {"=", new bindCommand}};
+
 std::map<std::string, Expression*> ExpressTable;
 std::vector<std::string> toParse;
 mapHandler mapH;
+Lexer l;
+Parser p;
 
 public:
 
@@ -48,7 +49,6 @@ void lexer(std::string & line);
 
 void parser();
 
-    std::map<std::string, Command*> getCommands();
 
 };
 

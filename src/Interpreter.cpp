@@ -6,40 +6,28 @@
 
 
 
-
 void Interpreter::lexer(std::string& line) {
-
-    std::istringstream iss(line);
-    while(!iss.eof()) {
-        std::string temp;
-        iss >> temp;
-        toParse.push_back(temp);
-    }
+    l.lex(line,toParse);
 }
 
 void Interpreter::parser() {
-    std::vector<std::string>::iterator iter;
-
-    for (iter = toParse.begin(); iter != toParse.end(); iter++){
-        CommandTable[*iter]->execute(iter);
-    }
-    while(!toParse.empty()) toParse.pop_back();
+p.parse(toParse);
 }
 
 
 
-std::map<std::string, Command *> Interpreter::getCommands() {
-    return CommandTable;
-}
 
 Interpreter::Interpreter() {
     mapH.setSymbleMap(symblTable);
     mapH.setbindtovarMap(bindtoVarTable);
     mapH.setbindtovarMap(vartoBindTable);
+    mapH.settoParse(toParse);
+    mapH.setCommandTable(CommandTable);
     std::map<std::string, Command * >::iterator iter;
     for (iter = CommandTable.begin(); iter != CommandTable.end(); iter++){
         (*iter).second->addMaps(this->mapH);
     }
+    p.addMaps(mapH);
 
 
 }

@@ -27,3 +27,19 @@ void mapHandler::setvartobindMap(std::map<std::string, std::string> &vartoBindTa
 void mapHandler::setbindtovarMap(std::map<std::string, std::string> &bindtoVarTable1) {
  bindtoVarTable = &bindtoVarTable1;
 }
+
+std::vector<std::string> *mapHandler::gettoParse() {
+    return toParse;
+}
+
+void mapHandler::settoParse(std::vector<std::string> &toParse1) {
+    toParse = &toParse1;
+}
+
+void mapHandler::setCommandTable(std::map<std::string, Command *> &CommandTable1) {
+    CommandTable = &CommandTable1;
+}
+
+std::map<std::string, Command *> *mapHandler::getCommandTable() {
+    return CommandTable;
+}

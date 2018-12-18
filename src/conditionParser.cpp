@@ -7,7 +7,6 @@
 void conditionParser::execute(std::vector<std::string>::iterator &iter) {
     checkCondition(iter);
 
-
 }
 
 

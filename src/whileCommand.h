@@ -7,11 +7,13 @@
 
 
 #include "Command.h"
+#include "conditionParser.h"
 
-class whileCommand: public Command {
+class whileCommand: public conditionParser {
 public:
     void execute(std::vector<std::string>::iterator &iter) override;
     void addMaps(mapHandler &mapHandler1) override;
+
 
 };
 

@@ -5,11 +5,11 @@
 #ifndef STEPPING_STONE1_COMMAND_H
 #define STEPPING_STONE1_COMMAND_H
 
-
 #include <string>
 #include <vector>
 #include <map>
 #include "mapHandler.h"
+
 
 class Command {
 protected:
