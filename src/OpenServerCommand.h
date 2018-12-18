@@ -8,8 +8,8 @@
 #include <string>
 #include "Command.h"
 
-
 class OpenServerCommand:public Command{
+    std::vector<std::string> fromServerToMap;
 public:
     void execute(std::vector<std::string>::iterator &iter) override;
 

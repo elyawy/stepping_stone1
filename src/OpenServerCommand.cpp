@@ -13,6 +13,7 @@
 #include <cstring>
 
 #include <sys/socket.h>
+#include <sstream>
 
 
 void OpenServerCommand::execute(std::vector<std::string>::iterator &iter) {
@@ -67,6 +68,14 @@ void OpenServerCommand::execute(std::vector<std::string>::iterator &iter) {
          if (n < 0) {
              perror("ERROR reading from socket");
              exit(1);
+         }
+
+     /* Push all argument from server to a vector */
+         std::istringstream iss(buffer);
+         while(!iss.eof()) {
+             std::string temp;
+             iss >> temp;
+             fromServerToMap.push_back(temp);
          }
 
          printf("Here is the message: %s\n", buffer);
