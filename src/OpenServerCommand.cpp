@@ -60,24 +60,25 @@ void OpenServerCommand::execute(std::vector<std::string>::iterator &iter) {
      }
 
      /* If connection is established then start communicating */
-     bzero(buffer,256);
-     n = read( newsockfd,buffer,255 );
+     while (true) {
+         bzero(buffer, 256);
+         n = read(newsockfd, buffer, 255);
 
-     if (n < 0) {
-         perror("ERROR reading from socket");
-         exit(1);
+         if (n < 0) {
+             perror("ERROR reading from socket");
+             exit(1);
+         }
+
+         printf("Here is the message: %s\n", buffer);
+
+         /* Write a response to the client */
+         n = write(newsockfd, "I got your message", 18);
+
+         if (n < 0) {
+             perror("ERROR writing to socket");
+             exit(1);
+         }
      }
-
-     printf("Here is the message: %s\n",buffer);
-
-     /* Write a response to the client */
-     n = write(newsockfd,"I got your message",18);
-
-     if (n < 0) {
-         perror("ERROR writing to socket");
-         exit(1);
-     }
-
 }
 
 void OpenServerCommand::addMaps(mapHandler &mapHandler1) {
