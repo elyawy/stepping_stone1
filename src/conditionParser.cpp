@@ -74,3 +74,8 @@ bool conditionParser::equalto(std::vector<std::string>::iterator &iter){
     return x == y;
 
 }
+
+void conditionParser::addTokens(std::map<std::string, SECONDSTAGE> *tokenized1) {
+    tokenized = tokenized1;
+
+}

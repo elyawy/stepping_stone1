@@ -8,7 +8,7 @@ Number::Number(double number) {
     this->num = number;
 }
 
-double Number::calculate(std::vector<std::string>::iterator &iter) {
+double Number::calculate(mapHandler &mapH) {
     return this->num;
 }
 

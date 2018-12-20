@@ -36,10 +36,5 @@ void mapHandler::settoParse(std::vector<std::string> &toParse1) {
     toParse = &toParse1;
 }
 
-void mapHandler::setCommandTable(std::map<std::string, Command *> &CommandTable1) {
-    CommandTable = &CommandTable1;
-}
 
-std::map<std::string, Command *> *mapHandler::getCommandTable() {
-    return CommandTable;
-}
+

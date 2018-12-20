@@ -13,7 +13,7 @@ public:
     Div(double left, Expression* right);
     Div(Expression* left, double right);
     Div(double left, double right);
-    double calculate(std::vector<std::string>::iterator &iter) override;
+    double calculate(mapHandler &mapH) override;
 };
 
 

@@ -16,6 +16,9 @@ public:
     void execute(std::vector<std::string>::iterator &iter) override;
     bool checkCondition(std::vector<std::string>::iterator &iter);
 
+    void addTokens(std::map<std::string , SECONDSTAGE > *tokenized1) override;
+
+
     void addMaps(mapHandler &mapHandler1) override;
 
     bool lessthan(std::vector<std::string>::iterator &iter);

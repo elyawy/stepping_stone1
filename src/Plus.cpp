@@ -20,8 +20,8 @@ Plus::Plus(double left, double right) : BinaryExpression(left, right) {
 
 }
 
-double Plus::calculate(std::vector<std::string>::iterator &iter) {
-    return this->getLeftExp()->calculate(iter) + this->getRightExp()->calculate(iter);
+double Plus::calculate(mapHandler &mapH) {
+    return this->getLeftExp()->calculate(mapH) + this->getRightExp()->calculate(mapH);
 }
 
 

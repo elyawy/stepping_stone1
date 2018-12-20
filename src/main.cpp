@@ -9,6 +9,7 @@ int main() {
     do {
         std::getline(std::cin, line);
         if(line == "`") break;
+        if(line.empty()) continue;
         i.lexer(line);
         i.parser();
     } while (line != "`");

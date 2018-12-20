@@ -13,7 +13,7 @@ public:
     Mul(double left, Expression* right);
     Mul(Expression* left, double right);
     Mul(double left, double right);
-    double calculate(std::vector<std::string>::iterator &iter) override;
+    double calculate(mapHandler &mapH) override;
 };
 
 

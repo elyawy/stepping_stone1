@@ -11,3 +11,8 @@ void sleepCommand::execute(std::vector<std::string>::iterator &iter) {
 void sleepCommand::addMaps(mapHandler &mapHandler1) {
     mapH = mapHandler1;
 }
+
+void sleepCommand::addTokens(std::map<std::string, SECONDSTAGE> *tokenized1) {
+    tokenized = tokenized1;
+
+}

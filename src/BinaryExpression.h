@@ -17,7 +17,7 @@ public:
     BinaryExpression(double left, Expression* right);
     BinaryExpression(Expression* left, double right);
     BinaryExpression(double left, double right);
-    double calculate(std::vector<std::string>::iterator &iter) override = 0;
+    double calculate(mapHandler &mapH) override = 0;
     Expression* getLeftExp();
     Expression* getRightExp();
 };

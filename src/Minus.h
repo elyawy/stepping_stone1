@@ -13,7 +13,7 @@ public:
     Minus(double left, Expression* right);
     Minus(Expression* left, double right);
     Minus(double left, double right);
-    double calculate(std::vector<std::string>::iterator &iter) override;
+    double calculate(mapHandler &mapH) override;
 };
 
 

@@ -5,18 +5,11 @@
 #ifndef STEPPING_STONE1_INTERPRETER_H
 #define STEPPING_STONE1_INTERPRETER_H
 
-
+#include <iostream>
 #include "Lexer.h"
 #include "Parser.h"
 #include "Command.h"
 #include "Expression.h"
-#include "DefineVarCommand.h"
-#include "OpenServerCommand.h"
-#include "ConnectServerCommand.h"
-#include "whileCommand.h"
-#include "printCommand.h"
-#include "sleepCommand.h"
-#include "bindCommand.h"
 #include <string>
 #include <map>
 #include <vector>
@@ -28,14 +21,6 @@ private:
 std::map<std::string, double> symblTable;
 std::map<std::string, std::string> vartoBindTable;
 std::map<std::string, std::string> bindtoVarTable;
-std::map<std::string, Command*> CommandTable = {{"var", new DefineVarCommand},
-                                                {"openDataServer", new OpenServerCommand},
-                                                {"connect", new ConnectServerCommand},
-                                                {"while", new whileCommand},
-                                                {"print", new printCommand},
-                                                {"sleep", new sleepCommand},
-                                                {"=", new bindCommand}};
-
 std::map<std::string, Expression*> ExpressTable;
 std::vector<std::string> toParse;
 mapHandler mapH;
@@ -52,6 +37,7 @@ void lexer(std::string & line);
 
 void parser();
 
+mapHandler *getMapH();
 
 };
 

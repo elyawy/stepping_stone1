@@ -9,15 +9,19 @@
 #include <vector>
 #include <map>
 #include "mapHandler.h"
-
+#include "Lexer.h"
+#include "Expression.h"
 
 class Command {
 protected:
     mapHandler mapH;
+    std::map<std::string , SECONDSTAGE > *tokenized;
 public:
 
     virtual void execute(std::vector<std::string>::iterator &iter){}
     virtual ~Command() = default;
+
+    virtual void addTokens(std::map<std::string , SECONDSTAGE > *tokenized1){}
 
     virtual void addMaps(mapHandler &mapHandler1){}
 };

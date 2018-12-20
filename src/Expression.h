@@ -7,10 +7,11 @@
 
 #include <string>
 #include <vector>
+#include "mapHandler.h"
 
 class Expression {
 public:
-    virtual double calculate(std::vector<std::string>::iterator &iter) = 0;
+    virtual double calculate(mapHandler &mapH) = 0;
     virtual ~Expression(){};
 };
 

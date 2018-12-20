@@ -14,3 +14,8 @@ void whileCommand::execute(std::vector<std::string>::iterator &iter) {
 void whileCommand::addMaps(mapHandler &mapHandler1) {
     mapH = mapHandler1;
 }
+
+void whileCommand::addTokens(std::map<std::string, SECONDSTAGE> *tokenized1) {
+    tokenized = tokenized1;
+
+}

@@ -17,9 +17,10 @@ private:
 public:
     explicit CommandExpression(Command *command);
 
-    double calculate(std::vector<std::string>::iterator &iter) override;
+    double calculate(mapHandler &mapH) override;
 
     ~CommandExpression() override;
+
 
 };
 

@@ -6,8 +6,9 @@
 #include <vector>
 #include "Lexer.h"
 
-void Lexer::lex(std::string &line, std::vector<std::string> &toParse) {
+void Lexer::lex(std::string &line, std::vector<std::string> &toParse1) {
     tokenizer(line);
+    toParse = &toParse1;
     std::string temp = "";
     int x = (int) token_list.size();
 
@@ -81,9 +82,6 @@ void Lexer::tokenize(char &a,int location) {
     if (isdigit(a) != 0) token_list.emplace(location, number);
 }
 
-void Lexer::addMaps(mapHandler &mapHandler1) {
-    mapH = mapHandler1;
-}
 
 void Lexer::quotes(std::string &line, int &i) {
     std::string temp = "";
@@ -95,7 +93,7 @@ void Lexer::quotes(std::string &line, int &i) {
         if (i >= line.size()) throw "lexing gone wrong";
     }
     temp += '\"';
-    mapH.gettoParse()->push_back(temp);
+    toParse->push_back(temp);
     scanned_list.emplace(temp, QUOTED);
     temp = "";
 }
@@ -104,13 +102,13 @@ void Lexer::Brackets(std::string &line, int &i) {
     std::string temp = "";
     if (token_list.at(i) == CurlBracketstart) {
         temp += line[i];
-        mapH.gettoParse()->push_back(temp);
+        toParse->push_back(temp);
         scanned_list.emplace(temp, FUNCSTART);
         temp = "";
     }
     if (token_list.at(i) == CurlBracketend){
         temp  += line[i];
-        mapH.gettoParse()->push_back(temp);
+        toParse->push_back(temp);
         scanned_list.emplace(temp, FUNCEND);
         temp = "";
     }
@@ -131,7 +129,7 @@ void Lexer::Parethesis(std::string &line, int &i) {
         if (i >= line.size()) throw "lexing gone wrong";
     }
     temp += ')';
-    mapH.gettoParse()->push_back(temp);
+    toParse->push_back(temp);
     scanned_list.emplace(temp, TOEVALUTE);
     temp = "";
 }
@@ -146,9 +144,9 @@ void Lexer::Words(std::string &line, int &i) {
         i++;
         if (i >= line.size()) throw "lexing gone wrong";
     }
-    if (mapH.getCommandTable()->count(temp) > 0) {
+    if (isCommand(temp)) {
         scanned_list.emplace(temp, KEYWORD);
-        mapH.gettoParse()->push_back(temp);
+        toParse->push_back(temp);
         if (temp == "openDataServer" || temp == "connect"){
             i++;
             Express(line, i);
@@ -165,7 +163,7 @@ void Lexer::Words(std::string &line, int &i) {
         temp = "";
     } else {
         scanned_list.emplace(temp, VARIABLE);
-        mapH.gettoParse()->push_back(temp);
+        toParse->push_back(temp);
         temp = "";
     }
 }
@@ -189,7 +187,7 @@ void Lexer::Express(std::string &line, int &i) {
         if (i >= line.size()) break;
     }
     scanned_list.emplace(temp, TOEVALUTE);
-    mapH.gettoParse()->push_back(temp);
+    toParse->push_back(temp);
 }
 
 void Lexer::equals(std::string &line, int &i) {
@@ -205,7 +203,7 @@ void Lexer::equals(std::string &line, int &i) {
         }
             if (temp == "bind ") {
                 scanned_list.emplace(temp, KEYWORD);
-                mapH.gettoParse()->push_back(temp);
+                toParse->push_back(temp);
             } else i = j;
         } else {
         while (i < line.size()) {
@@ -213,7 +211,7 @@ void Lexer::equals(std::string &line, int &i) {
             i++;
         }
         scanned_list.emplace(temp, TOEVALUTE);
-        mapH.gettoParse()->push_back(temp);
+        toParse->push_back(temp);
     }
 }
 
@@ -230,7 +228,7 @@ void Lexer::Conditions(std::string &line, int &i) {
         temp.erase(temp.end()-1);
     }
     scanned_list.emplace(temp, TOEVALUTE);
-    mapH.gettoParse()->push_back(temp);
+    toParse->push_back(temp);
 }
 
 void Lexer::Printer(std::string &line, int &i) {
@@ -248,10 +246,16 @@ void Lexer::Printer(std::string &line, int &i) {
         }
         if (i == line.size()) i--;
         scanned_list.emplace(temp, TOEVALUTE);
-        mapH.gettoParse()->push_back(temp);
+        toParse->push_back(temp);
     }
 }
 
 std::map<std::string, SECONDSTAGE> *Lexer::getTOKENS() {
     return &scanned_list;
+}
+
+bool Lexer::isCommand(std::string &temp){
+
+    return temp == "print" || "openDataServer" || "var" || "connect" || "while" || "sleep" || "if";
+
 }
