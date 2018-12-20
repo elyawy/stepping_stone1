@@ -7,15 +7,22 @@
 
 
 #include "mapHandler.h"
+#include "Expression.h"
+#include "Lexer.h"
 
 class Parser {
 private:
 mapHandler mapH;
+std::map<std::string , SECONDSTAGE > *tokens;
 public:
-    void parse( std::vector<std::string> &toParse);
+    void parse( std::vector<std::string> &toParse , std::map<std::string , SECONDSTAGE > *tokenized);
     void addMaps(mapHandler &mapHandler1);
 
+    void twoArgs( std::vector<std::string> &toParse);
 
+    void oneArg( std::vector<std::string> &toParse);
+
+    Expression * shuntingYard();
 };
 
 

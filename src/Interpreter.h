@@ -21,6 +21,8 @@
 #include <map>
 #include <vector>
 
+
+
 class Interpreter {
 private:
 std::map<std::string, double> symblTable;
@@ -39,6 +41,7 @@ std::vector<std::string> toParse;
 mapHandler mapH;
 Lexer l;
 Parser p;
+std::map<std::string , SECONDSTAGE > *tokenized;
 
 public:
 
