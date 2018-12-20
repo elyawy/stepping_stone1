@@ -22,7 +22,9 @@ public:
     void setvartobindMap(std::map<std::string, std::string> &vartoBindTable1);
     void setbindtovarMap(std::map<std::string, std::string> &bindtoVarTable1);
     void settoParse(std::vector<std::string> &toParse);
+    void setTokens(std::map<std::string, SECONDSTAGE> *tokens1);
 
+    std::map<std::string, SECONDSTAGE > *getTokens();
     std::map<std::string, std::string> * getbindtovarMap();
     std::map<std::string, std::string> * getvartobindMap();
     std::map<std::string, double> * getsymblTable();

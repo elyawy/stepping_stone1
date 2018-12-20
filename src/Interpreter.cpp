@@ -9,11 +9,13 @@
 void Interpreter::lexer(std::string& line) {
     l.lex(line,toParse);
     tokenized = l.getTOKENS();
+    mapH.setTokens(tokenized);
     std::cout << "passed" << std::endl;
 }
 
 void Interpreter::parser() {
-p.parse(toParse, tokenized);
+    p.addMaps(mapH);
+    p.parse(toParse, tokenized);
 }
 
 
@@ -25,7 +27,6 @@ Interpreter::Interpreter() {
     mapH.setbindtovarMap(vartoBindTable);
     mapH.settoParse(toParse);
 
-    p.addMaps(mapH);
 }
 
 mapHandler *Interpreter::getMapH() {

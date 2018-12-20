@@ -7,10 +7,10 @@
 #include <algorithm>
 
 void printCommand::execute(std::vector<std::string>::iterator &iter) {
-    if (tokenized->at(mapH.gettoParse()->at(1)) == QUOTED){
+    if (mapH.getTokens()->at(mapH.gettoParse()->at(1)) == QUOTED){
         toPrint = mapH.gettoParse()->at(1);
         std::cout << toPrint << std::endl;
-    } else if(tokenized->at(mapH.gettoParse()->at(1)) == TOEVALUTE) {
+    } else if(mapH.getTokens()->at(mapH.gettoParse()->at(1)) == TOEVALUTE) {
 
 
     }

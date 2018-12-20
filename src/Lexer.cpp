@@ -7,6 +7,7 @@
 #include "Lexer.h"
 
 void Lexer::lex(std::string &line, std::vector<std::string> &toParse1) {
+    scanned_list.clear();
     tokenizer(line);
     toParse = &toParse1;
     std::string temp = "";
@@ -41,15 +42,7 @@ void Lexer::lex(std::string &line, std::vector<std::string> &toParse1) {
             if (i == (int)token_list.size()) break;
         }
     }
-//    std::istringstream iss(line);
-//    while(!iss.eof()) {
-//        std::string temp;
-//        iss >> temp;
-//        if (mapH.getCommandTable()->count(temp) == 0){
-//            tokenizer(temp);
-//        }
-//        toParse.push_back(temp);
-//    }
+    token_list.clear();
 }
 
 void Lexer::tokenizer(std::string &line) {
@@ -63,23 +56,39 @@ void Lexer::tokenizer(std::string &line) {
 void Lexer::tokenize(char &a,int location) {
     switch (a){
         case '(':token_list.emplace(location, Bracketstart);
+            return;
         case ')':token_list.emplace(location, Bracketend);
+            return;
         case '{':token_list.emplace(location, CurlBracketstart);
+            return;
         case '}':token_list.emplace(location, CurlBracketend);
+            return;
         case '-':token_list.emplace(location, SUBSTRACT);
+            return;
         case '+':token_list.emplace(location, ADD);
+            return;
         case '*':token_list.emplace(location, MULTIPLY);
+            return;
         case '/':token_list.emplace(location, DIVIDE);
+            return;
         case '=': token_list.emplace(location, EQUAL);
+            return;
         case '\"':token_list.emplace(location, quote);
+            return;
         case '<': token_list.emplace(location, Conditional);
+            return;
         case '>': token_list.emplace(location, Conditional);
+            return;
         case ' ': token_list.emplace(location, SPACE);
+            return;
         default:
             break;
     }
-    if (isalpha(a) != 0) token_list.emplace(location, LETTER);
-    if (isdigit(a) != 0) token_list.emplace(location, number);
+    if (isalpha(a) != 0) {token_list.emplace(location, LETTER);
+        return;}
+    if (isdigit(a) != 0){token_list.emplace(location, number);
+        return;}
+    token_list.emplace(location, OTHER);
 }
 
 

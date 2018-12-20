@@ -36,5 +36,13 @@ void mapHandler::settoParse(std::vector<std::string> &toParse1) {
     toParse = &toParse1;
 }
 
+void mapHandler::setTokens(std::map<std::string, SECONDSTAGE> *tokens1) {
+    tokens = tokens1;
+}
+
+std::map<std::string, SECONDSTAGE> *mapHandler::getTokens() {
+    return tokens;
+}
+
 
 
