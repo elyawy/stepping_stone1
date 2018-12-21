@@ -7,15 +7,22 @@
 
 
 #include "Expression.h"
+#include <queue>
 
 class Evaluator {
 
-
+public:
     Expression * analizer(std::string &express);
 
-    Expression * shuntingYard();
+    Expression * shuntingYard(std::string &express);
 
+    int operatorValue(std::string &a);
 
+    bool isOperator(std::string &a);
+
+    Expression * expressionBuilder(std::vector<std::string> &queue);
+
+    bool isNum(std::string &a);
 };
 
 
