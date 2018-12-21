@@ -44,5 +44,13 @@ std::map<std::string, SECONDSTAGE> *mapHandler::getTokens() {
     return tokens;
 }
 
+void mapHandler::setExpresssions(std::map<std::string, Expression *> &expressList1) {
+ expressList = &expressList1;
+}
+
+std::map<std::string, Expression *> *mapHandler::getExpressions() {
+    return expressList;
+}
+
 
 

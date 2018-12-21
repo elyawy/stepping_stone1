@@ -26,6 +26,7 @@ Interpreter::Interpreter() {
     mapH.setbindtovarMap(bindtoVarTable);
     mapH.setbindtovarMap(vartoBindTable);
     mapH.settoParse(toParse);
+    mapH.setExpresssions(ExpressTable);
 
 }
 
