@@ -5,14 +5,11 @@
 #include "varExpression.h"
 
 
-varExpression::varExpression(std::string number) {
-    this->num = stoi(number);
+varExpression::varExpression(std::string &var) {
+    this->num = var;
 }
 
 double varExpression::calculate(mapHandler &mapH) {
-    return this->num;
+    return mapH.getsymblTable()->at(num);
 }
 
-double varExpression::getNum() {
-    return this->num;
-}

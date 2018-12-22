@@ -8,13 +8,13 @@
 
 #include "Expression.h"
 
+
 class varExpression: public Expression {
 private:
-    double num;
+    std::string num;
 public:
-    explicit varExpression(std::string number);
+    explicit varExpression(std::string &var);
     double calculate(mapHandler &mapH) override;
-    double getNum();
 };
 
 
