@@ -105,6 +105,8 @@ int Evaluator::operatorValue(std::string &a) {
     if (a == "-") return 10;
     if (a == "*") return 20;
     if (a == "/") return 20;
+
+    return 0;
 }
 
 bool Evaluator::isOperator(std::string &a) {
@@ -121,10 +123,7 @@ Expression *Evaluator::expressionBuilder(std::vector<std::string> &queue) {
         }
     }
 
-//    switch (queue.back()){
-//        case '+': {new Plus(2,expressionBuilder(queue));}
-//
-//    }
+
 
 }
 
