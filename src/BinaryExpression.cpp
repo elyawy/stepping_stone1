@@ -33,6 +33,11 @@ Expression* BinaryExpression::getRightExp() {
     return this->rightExp;
 }
 
+BinaryExpression::~BinaryExpression() {
+    delete(leftExp);
+    delete(rightExp);
+}
+
 
 
 

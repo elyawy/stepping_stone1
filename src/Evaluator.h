@@ -22,6 +22,11 @@ public:
 
     Expression * expressionBuilder(std::vector<std::string> &queue);
 
+    Expression * plusBuilder(std::vector<std::string> &queue);
+    Expression * minusBuilder(std::vector<std::string> &queue);
+    Expression * multBuilder(std::vector<std::string> &queue);
+    Expression * divBuilder(std::vector<std::string> &queue);
+
     bool isNum(std::string &a);
 };
 

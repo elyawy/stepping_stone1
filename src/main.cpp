@@ -2,20 +2,27 @@
 #include "test.h"
 #include "ExpTest.h"
 #include "Interpreter.h"
+#include "mapHandler.h"
 //load script file using lexer function and then parse using parser function.
 int main() {
-    std::string line;
+    std::string line = "";
+    double result;
     Interpreter i;
     Evaluator E;
-    std::string temp = "2/(throttle -5) + x";
-    E.analizer(temp);
-    do {
-        std::getline(std::cin, line);
-        if(line == "`") break;
-        if(line.empty()) continue;
+    mapHandler H;
+    std::string temp = " 3 * 3";
+    Expression* exp;
+    exp = E.analizer(temp);
+    result = exp->calculate(H);
 
-//        i.lexer(line);
-//        i.parser();
-    } while (line != "`");
+    delete(exp);
+//    do {
+//        std::getline(std::cin, line);
+//        if(line == "`") break;
+//        if(line.empty()) continue;
+//
+////        i.lexer(line);
+////        i.parser();
+//    } while (line != "`");
     return 0;
 }

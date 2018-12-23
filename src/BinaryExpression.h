@@ -20,6 +20,8 @@ public:
     double calculate(mapHandler &mapH) override = 0;
     Expression* getLeftExp();
     Expression* getRightExp();
+
+    ~BinaryExpression() override;
 };
 
 
