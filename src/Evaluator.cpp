@@ -11,29 +11,50 @@
 #include "Minus.h"
 #include "Mul.h"
 #include "Div.h"
+#include "booleanExpression.h"
 
 Expression *Evaluator::analizer(std::string &express) {
     int i = 0;
-    std::string temp;
-//    while (i < express.size()){
-//        temp+= express[i];
-////      if (express[i] == '<' || '>' || '='){
-////
-////        // booleanExpression creator.
-////
-////        // return boolean expression.
-////       }
-//        i++;
-//    }
-    return shuntingYard(express);
+    std::string left;
+    std::string right;
 
+    std::string boolean;
+    while (i < express.size()){
+
+      if (express[i] == '<' ||express[i] == '>' ||express[i] == '='){
+        boolean += express[i];
+        i++;
+        if (express[i] == '<' ||express[i] == '>' ||express[i] == '='){
+            boolean += express[i];
+            i++;
+            break;
+        } else break;
+        // booleanExpression creator.
+
+        // return boolean expression.
+       }
+        left+= express[i];
+        i++;
+    }
+    if (!boolean.empty()) {
+        while (i < express.size()) {
+            left += express[i];
+        }
+    }
+    if (boolean.empty()) return shuntingYard(left);
+
+    if (!boolean.empty()){
+        auto boolexp = new booleanExpression(shuntingYard(left), shuntingYard(right));
+        boolexp->setcomparator(boolean);
+        return boolexp;
+    }
 }
 
 Expression *Evaluator::shuntingYard(std::string &express1) {
     int i = 0;
     std::vector<std::string> express;
     for (int j = 0; j < express1.size(); j++) {
-        std::string temp = "";
+        std::string temp;
         if (express1[j] == ' ') continue;
         while (isalpha(express1[j])){
             temp += express1[j];
@@ -48,6 +69,9 @@ Expression *Evaluator::shuntingYard(std::string &express1) {
         while (isdigit(express1[j])){
             temp += express1[j];
             j++;
+            if (express1[j] == '.') {temp += express1[j];
+                continue;
+            }
             if (!isdigit(express1[j]) && !temp.empty()) {
                 express.push_back(temp);
                 j--;break;}

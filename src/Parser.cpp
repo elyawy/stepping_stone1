@@ -47,7 +47,8 @@ Expression *Parser::expressionFactory(std::vector<std::string> &toParse) {
     int i = 0;
     while (i < toParse.size()) {
         if (mapH.getTokens()->at(toParse[i]) == TOEVALUTE) {
-
+            Evaluator evaluator;
+//            evaluator.analizer()
         } else if (mapH.getTokens()->at(toParse[i]) == KEYWORD){
 
         } else if (mapH.getTokens()->at(toParse[i]) == VARIABLE){
