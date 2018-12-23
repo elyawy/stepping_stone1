@@ -7,37 +7,12 @@
 #include <algorithm>
 
 void printCommand::execute(std::vector<std::string>::iterator &iter) {
-    if (mapH.getTokens()->at(mapH.gettoParse()->at(1)) == QUOTED){
-        toPrint = mapH.gettoParse()->at(1);
-        std::cout << toPrint << std::endl;
-    } else if(mapH.getTokens()->at(mapH.gettoParse()->at(1)) == TOEVALUTE) {
-
-
+    if (mapH.getExpressions()->count("evaluate")>0){
+        std::cout << mapH.getExpressions()->at("evaluate")->calculate(mapH) << std::endl;
     }
-
-
-
-//    iter++;
-//
-//    if (mapH.getsymblTable()->count(*iter) > 0 ){
-//
-//        std::cout << mapH.getsymblTable()->at(*iter) << std::endl;
-//    }
-//
-//    if ((*iter)[0] == '\"') {
-//        do {
-//            if ((*iter)[(*iter).size()-1] == '\"') {
-//                (*iter).erase(std::remove((*iter).begin(),(*iter).end(), '\"'), (*iter).end());
-//                std::cout << (*iter);
-//                break;
-//            }
-//            (*iter).erase(std::remove((*iter).begin(),(*iter).end(), '\"'), (*iter).end());
-//            std::cout << *iter << " ";
-//            iter++;
-//
-//        } while (!(*iter).empty());
-//        std::cout << std::endl;
-//    }
+    if (mapH.getExpressions()->count("to_print")>0){
+        mapH.getExpressions()->at("to_print")->calculate(mapH);
+    }
 }
 
 void printCommand::addMaps(mapHandler &mapHandler1) {

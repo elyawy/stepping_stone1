@@ -9,26 +9,37 @@
 #include "Command.h"
 #include "CommandExpression.h"
 #include "printCommand.h"
+#include "DefineVarCommand.h"
+#include "OpenServerCommand.h"
+#include "ConnectServerCommand.h"
+#include "bindCommand.h"
+#include "quotedExpression.h"
 
 void Parser::parse(std::vector<std::string> &toParse,std::map<std::string , SECONDSTAGE > *tokenized) {
     std::vector<std::string>::iterator iter;
     std::vector<CommandExpression*> toExecute;
     tokens = tokenized;
 
-    if (tokens->at(toParse[0]) == KEYWORD){
-        if (toParse[0] == "print" || toParse[0] == "var" ) oneArg(toParse);
+    expressionFactory(toParse);
+
+    mapH.getExpressions()->at("print")->calculate(mapH);
+
+    std::map<std::string, Expression*>::iterator maper;
+    maper = mapH.getExpressions()->begin();
+    while (maper != mapH.getExpressions()->end()){
+        delete (*maper).second;
+        maper++;
     }
 
-    while(!toParse.empty()) toParse.pop_back();
-    if(!tokens->empty()) tokens->clear();
+    mapH.getExpressions()->clear();
+    toParse.clear();
+    tokens->clear();
 }
 
 
 void Parser::addMaps(mapHandler &mapHandler1) {
     mapH = mapHandler1;
 }
-
-
 
 void Parser::twoArgs(std::vector<std::string> &toParse) {
 
@@ -43,21 +54,29 @@ void Parser::oneArg(std::vector<std::string> &toParse) {
     }
 }
 
-Expression *Parser::expressionFactory(std::vector<std::string> &toParse) {
+void Parser::expressionFactory(std::vector<std::string> &toParse) {
     int i = 0;
     while (i < toParse.size()) {
         if (mapH.getTokens()->at(toParse[i]) == TOEVALUTE) {
             Evaluator evaluator;
-            mapH.getExpressions()->emplace(toParse[i], evaluator.analizer(toParse[i]));
+            mapH.getExpressions()->emplace("evaluate", evaluator.analizer(toParse[i]));
         } else if (mapH.getTokens()->at(toParse[i]) == KEYWORD){
-
+            mapH.getExpressions()->emplace(toParse[i], keywordSorter(toParse[i]));
         } else if (mapH.getTokens()->at(toParse[i]) == VARIABLE){
-
+            mapH.getExpressions()->emplace(toParse[i],new CommandExpression(new DefineVarCommand));
         } else if (mapH.getTokens()->at(toParse[i]) == QUOTED){
-
+            mapH.getExpressions()->emplace("to_print",new quotedExpression(toParse[i]));
         }
         i++;
     }
 }
 
+Expression * Parser::keywordSorter(std::string &keyword) {
+    if(keyword == "var") return new CommandExpression(new DefineVarCommand());
+    if(keyword == "print") return new CommandExpression(new printCommand());
+    if(keyword == "openDataServer") return new CommandExpression(new OpenServerCommand());
+    if(keyword == "connect") return new CommandExpression(new ConnectServerCommand());
+    if(keyword == "bind") return new CommandExpression(new bindCommand());
+}
 
+Parser::~Parser() = default;

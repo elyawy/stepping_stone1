@@ -5,12 +5,8 @@
 #include "mapHandler.h"
 //load script file using lexer function and then parse using parser function.
 int main() {
-    std::string line = "1.2";
+    std::string line;
     Interpreter i;
-
-    double x = stod(line);
-    std::cout << x << std::endl;
-
         do {
         std::getline(std::cin, line);
         if(line == "`") break;

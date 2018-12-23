@@ -39,6 +39,8 @@ void parser();
 
 mapHandler *getMapH();
 
+~Interpreter();
+
 };
 
 

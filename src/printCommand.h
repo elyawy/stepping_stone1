@@ -10,7 +10,6 @@
 
 
 class printCommand: public Command {
-    std::string toPrint;
     Expression * expression;
 public:
     void execute(std::vector<std::string>::iterator &iter) override;
