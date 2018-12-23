@@ -24,6 +24,14 @@ double Plus::calculate(mapHandler &mapH) {
     return this->getLeftExp()->calculate(mapH) + this->getRightExp()->calculate(mapH);
 }
 
+Plus::Plus(std::string &left, std::string &right) : BinaryExpression(left, right) {
+
+}
+
+Plus::Plus(Expression *left, std::string &right) : BinaryExpression(left, right) {
+
+}
+
 
 
 

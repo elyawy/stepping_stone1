@@ -13,6 +13,11 @@ public:
     Minus(double left, Expression* right);
     Minus(Expression* left, double right);
     Minus(double left, double right);
+
+    Minus(Expression *left, std::string &right);
+
+    Minus(std::string &left, std::string &right);
+
     double calculate(mapHandler &mapH) override;
 };
 

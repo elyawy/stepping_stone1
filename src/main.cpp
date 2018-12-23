@@ -10,7 +10,10 @@ int main() {
     Interpreter i;
     Evaluator E;
     mapHandler H;
-    std::string temp = " 3 * 3";
+    std::map<std::string, double> mymap;
+    mymap.emplace("x", 4);
+    H.setSymbleMap(mymap);
+    std::string temp = " 3 * x";
     Expression* exp;
     exp = E.analizer(temp);
     result = exp->calculate(H);

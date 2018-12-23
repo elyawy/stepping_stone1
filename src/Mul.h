@@ -13,6 +13,11 @@ public:
     Mul(double left, Expression* right);
     Mul(Expression* left, double right);
     Mul(double left, double right);
+
+    Mul(Expression *left, std::string &right);
+
+    Mul(std::string &left, std::string &right);
+
     double calculate(mapHandler &mapH) override;
 };
 

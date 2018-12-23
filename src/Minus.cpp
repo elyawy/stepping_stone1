@@ -15,3 +15,11 @@ Minus::Minus(double left, double right) : BinaryExpression(left, right) {}
 double Minus::calculate(mapHandler &mapH) {
     return this->getLeftExp()->calculate(mapH) - this->getRightExp()->calculate(mapH);
 }
+
+Minus::Minus(std::string &left, std::string &right) : BinaryExpression(left, right) {
+
+}
+
+Minus::Minus(Expression *left, std::string &right) : BinaryExpression(left, right) {
+
+}

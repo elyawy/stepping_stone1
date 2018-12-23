@@ -12,6 +12,12 @@ public:
     Div(Expression* left, Expression* right);
     Div(double left, Expression* right);
     Div(Expression* left, double right);
+
+    Div(Expression *left, std::string &right);
+
+
+    Div(std::string &left, std::string &right);
+
     Div(double left, double right);
     double calculate(mapHandler &mapH) override;
 };

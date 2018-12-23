@@ -15,3 +15,11 @@ Mul::Mul(double left, double right) : BinaryExpression(left, right) {}
 double Mul::calculate(mapHandler &mapH) {
     return this->getLeftExp()->calculate(mapH) * this->getRightExp()->calculate(mapH);
 }
+
+Mul::Mul(std::string &left, std::string &right) : BinaryExpression(left, right) {
+
+}
+
+Mul::Mul(Expression *left, std::string &right) : BinaryExpression(left, right) {
+
+}

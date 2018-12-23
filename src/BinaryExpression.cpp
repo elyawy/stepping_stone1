@@ -4,6 +4,7 @@
 
 #include <cmath>
 #include "BinaryExpression.h"
+#include "varExpression.h"
 
 BinaryExpression::BinaryExpression(Expression* left, Expression* right)  {
     this->leftExp = left;
@@ -36,6 +37,36 @@ Expression* BinaryExpression::getRightExp() {
 BinaryExpression::~BinaryExpression() {
     delete(leftExp);
     delete(rightExp);
+}
+
+BinaryExpression::BinaryExpression(std::string &left, std::string &right) {
+    if (isdigit(left[0]) && isdigit(right[0])) {
+        this->leftExp = new Number(stoi(left));
+        this->rightExp = new Number(stoi(right));
+    }
+    if (isdigit(left[0]) && isalpha(right[0])) {
+        this->leftExp = new Number(stoi(left));
+        this->rightExp = new varExpression(right);
+    }
+    if (isalpha(left[0]) && isdigit(right[0])) {
+        this->leftExp = new varExpression(left);
+        this->rightExp = new Number(stoi(right));
+    }
+    if (isalpha(left[0]) && isalpha(right[0])) {
+        this->leftExp = new varExpression(left);
+        this->rightExp = new varExpression(right);
+    }
+}
+
+BinaryExpression::BinaryExpression(Expression *left, std::string &right) {
+    if (isdigit(right[0])) {
+        this->leftExp = left;
+        this->rightExp = new Number(stoi(right));
+    }
+    if (isalpha(right[0])) {
+        this->leftExp = left;
+        this->rightExp = new varExpression(right);
+    }
 }
 
 

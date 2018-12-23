@@ -19,3 +19,11 @@ double Div::calculate(mapHandler &mapH) {
     }
     return this->getLeftExp()->calculate(mapH) / this->getRightExp()->calculate(mapH);
 }
+
+Div::Div(std::string &left, std::string &right) : BinaryExpression(left, right) {
+
+}
+
+Div::Div(Expression *left, std::string &right) : BinaryExpression(left, right) {
+
+}

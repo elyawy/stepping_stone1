@@ -156,28 +156,36 @@ return new Number(0);
 }
 
 bool Evaluator::isNum(std::string &a) {
+    if (a.empty()) return false;
     return isdigit(a[0]) || isalpha(a[0]);
 
 }
 
 Expression *Evaluator::divBuilder(std::vector<std::string> &queue) {
     queue.pop_back();
-    int i = (int)queue.size()-2;
+    int i = 0;
 
     if (isNum(queue.back())){
-        double newnum = stoi(queue.back());
+        std::string newnum = queue.back();
         queue.pop_back();
         if (isNum(queue.back())){
-            double newnum2 = stoi(queue.back());
+            std::string newnum2 = queue.back();
             queue.pop_back();
             return new Div(newnum2, newnum);
         } else return new Div(expressionBuilder(queue),newnum);
     }
-    while (i >= 0){
+    while (i + 1 < queue.size()){
         if(isNum(queue[i]) && isNum(queue[i+1])){
+            if (i+2 < queue.size()){
+                if (isNum(queue[i+2])) {
+                    i++;
+                    break;
+                }
+            }
+            i+= 3;
             break;
         }
-        i--;
+        i++;
     }
     std::vector<std::string> slim_up(queue.begin()+i,queue.end());
     std::vector<std::string> slim_down(queue.begin() ,queue.begin()+i);
@@ -186,27 +194,28 @@ Expression *Evaluator::divBuilder(std::vector<std::string> &queue) {
 
 Expression *Evaluator::multBuilder(std::vector<std::string> &queue) {
     queue.pop_back();
-    int i = (int)queue.size()-2;
+    int i = 0;
     if (isNum(queue.back())){
-        double newnum = stoi(queue.back());
+        std::string newnum = queue.back();
         queue.pop_back();
         if (isNum(queue.back())){
-            double newnum2 = stoi(queue.back());
+            std::string newnum2 = queue.back();
             queue.pop_back();
             return new Mul(newnum2, newnum);
         } else return new Mul(expressionBuilder(queue),newnum);
     }
-    while (i >= 0){
+    while (i + 1 < queue.size()){
         if(isNum(queue[i]) && isNum(queue[i+1])){
+            if (i+2 < queue.size()){
+                if (isNum(queue[i+2])) {
+                    i++;
+                    break;
+                }
+            }
+            i+=3;
             break;
         }
-        i--;
-    }
-    while (i >= 0){
-        if(isNum(queue[i]) && isNum(queue[i+1])){
-            break;
-        }
-        i--;
+        i++;
     }
     std::vector<std::string> slim_up(queue.begin()+i,queue.end());
     std::vector<std::string> slim_down(queue.begin() ,queue.begin()+i);
@@ -215,22 +224,29 @@ Expression *Evaluator::multBuilder(std::vector<std::string> &queue) {
 
 Expression *Evaluator::minusBuilder(std::vector<std::string> &queue) {
     queue.pop_back();
-    int i = (int)queue.size()-2;
+    int i = 0;
 
     if (isNum(queue.back())){
-        double newnum = stoi(queue.back());
+        std::string newnum = queue.back();
         queue.pop_back();
         if (isNum(queue.back())){
-            double newnum2 = stoi(queue.back());
+            std::string newnum2 = queue.back();
             queue.pop_back();
             return new Minus(newnum2, newnum);
         } else return new Minus(expressionBuilder(queue),newnum);
     }
-    while (i >= 0){
+    while (i + 1 < queue.size()){
         if(isNum(queue[i]) && isNum(queue[i+1])){
+            if (i+2 < queue.size()){
+                if (isNum(queue[i+2])) {
+                    i++;
+                    break;
+                }
+            }
+            i+= 3;
             break;
         }
-        i--;
+        i++;
     }
     std::vector<std::string> slim_up(queue.begin()+i,queue.end());
     std::vector<std::string> slim_down(queue.begin() ,queue.begin()+i);
@@ -239,22 +255,29 @@ Expression *Evaluator::minusBuilder(std::vector<std::string> &queue) {
 
 Expression *Evaluator::plusBuilder(std::vector<std::string> &queue) {
     queue.pop_back();
-    int i = (int)queue.size()-2;
+    int i = 0;
 
     if (isNum(queue.back())){
-        double newnum = stoi(queue.back());
+        std::string newnum = queue.back();
         queue.pop_back();
         if (isNum(queue.back())){
-            double newnum2 = stoi(queue.back());
+            std::string newnum2 = queue.back();
             queue.pop_back();
             return new Plus(newnum2, newnum);
         } else return new Plus(expressionBuilder(queue),newnum);
     }
-    while (i >= 0){
+    while (i + 1 < queue.size()){
         if(isNum(queue[i]) && isNum(queue[i+1])){
+            if (i+2 < queue.size()){
+                if (isNum(queue[i+2])) {
+                    i++;
+                    break;
+                }
+            }
+            i+= 3;
             break;
         }
-        i--;
+        i++;
     }
     std::vector<std::string> slim_up(queue.begin()+i,queue.end());
     std::vector<std::string> slim_down(queue.begin() ,queue.begin()+i);
