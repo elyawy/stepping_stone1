@@ -8,7 +8,7 @@ int main() {
     std::string line = "1.2";
     Interpreter i;
 
-    double x = stoi(line);
+    double x = stod(line);
     std::cout << x << std::endl;
 
         do {

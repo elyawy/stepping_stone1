@@ -157,7 +157,7 @@ bool Evaluator::isOperator(std::string &a) {
 Expression *Evaluator::expressionBuilder(std::vector<std::string> &queue) {
     if (queue.size() == 1) {
         if (isdigit(queue.back().at(0))){
-            double x = stoi(queue.back());
+            double x = stod(queue.back());
             return new Number(x);
         }
         if (isalpha(queue.back().at(0))){

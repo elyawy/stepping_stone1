@@ -41,16 +41,16 @@ BinaryExpression::~BinaryExpression() {
 
 BinaryExpression::BinaryExpression(std::string &left, std::string &right) {
     if (isdigit(left[0]) && isdigit(right[0])) {
-        this->leftExp = new Number(stoi(left));
-        this->rightExp = new Number(stoi(right));
+        this->leftExp = new Number(stod(left));
+        this->rightExp = new Number(stod(right));
     }
     if (isdigit(left[0]) && isalpha(right[0])) {
-        this->leftExp = new Number(stoi(left));
+        this->leftExp = new Number(stod(left));
         this->rightExp = new varExpression(right);
     }
     if (isalpha(left[0]) && isdigit(right[0])) {
         this->leftExp = new varExpression(left);
-        this->rightExp = new Number(stoi(right));
+        this->rightExp = new Number(stod(right));
     }
     if (isalpha(left[0]) && isalpha(right[0])) {
         this->leftExp = new varExpression(left);
@@ -61,7 +61,7 @@ BinaryExpression::BinaryExpression(std::string &left, std::string &right) {
 BinaryExpression::BinaryExpression(Expression *left, std::string &right) {
     if (isdigit(right[0])) {
         this->leftExp = left;
-        this->rightExp = new Number(stoi(right));
+        this->rightExp = new Number(stod(right));
     }
     if (isalpha(right[0])) {
         this->leftExp = left;

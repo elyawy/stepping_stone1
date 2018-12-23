@@ -48,7 +48,7 @@ Expression *Parser::expressionFactory(std::vector<std::string> &toParse) {
     while (i < toParse.size()) {
         if (mapH.getTokens()->at(toParse[i]) == TOEVALUTE) {
             Evaluator evaluator;
-//            evaluator.analizer()
+            mapH.getExpressions()->emplace(toParse[i], evaluator.analizer(toParse[i]));
         } else if (mapH.getTokens()->at(toParse[i]) == KEYWORD){
 
         } else if (mapH.getTokens()->at(toParse[i]) == VARIABLE){
@@ -56,6 +56,7 @@ Expression *Parser::expressionFactory(std::vector<std::string> &toParse) {
         } else if (mapH.getTokens()->at(toParse[i]) == QUOTED){
 
         }
+        i++;
     }
 }
 
