@@ -19,6 +19,8 @@ public:
 
     Plus(double left, double right);
     double calculate(mapHandler &mapH) override;
+
+    std::string stringify() override;
 };
 
 

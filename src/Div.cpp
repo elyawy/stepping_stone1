@@ -27,3 +27,7 @@ Div::Div(std::string &left, std::string &right) : BinaryExpression(left, right) 
 Div::Div(Expression *left, std::string &right) : BinaryExpression(left, right) {
 
 }
+
+std::string Div::stringify() {
+    return getLeftExp()->stringify() + " / " + getRightExp()->stringify();
+}

@@ -16,7 +16,7 @@ public:
 
     void addMaps(mapHandler &mapHandler1) override;
 
-
+    std::string stringify() override;
 };
 
 #endif //STEPPING_STONE1_BINDCOMMAND_H

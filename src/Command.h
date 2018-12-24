@@ -15,15 +15,15 @@
 class Command {
 protected:
     mapHandler mapH;
-    std::map<std::string , SECONDSTAGE > *tokenized;
 public:
 
     virtual void execute(){}
     virtual ~Command() = default;
 
-    virtual void addTokens(std::map<std::string , SECONDSTAGE > *tokenized1){}
-
     virtual void addMaps(mapHandler &mapHandler1){}
+
+    virtual std::string stringify() = 0;
+
 };
 
 

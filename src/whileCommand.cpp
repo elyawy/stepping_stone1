@@ -7,7 +7,6 @@
 
 void whileCommand::execute() {
     bool condition = checkCondition();
-    checkCondition();
 
 }
 
@@ -15,7 +14,7 @@ void whileCommand::addMaps(mapHandler &mapHandler1) {
     mapH = mapHandler1;
 }
 
-void whileCommand::addTokens(std::map<std::string, SECONDSTAGE> *tokenized1) {
-    tokenized = tokenized1;
-
+std::string whileCommand::stringify() {
+    return std::__cxx11::string();
 }
+

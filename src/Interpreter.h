@@ -23,6 +23,7 @@ std::map<std::string, std::string> vartoBindTable;
 std::map<std::string, std::string> bindtoVarTable;
 std::map<std::string, Expression*> ExpressTable;
 std::vector<std::string> toParse;
+std::vector<std::string> parsed;
 mapHandler mapH;
 Lexer l;
 Parser p;
@@ -36,6 +37,8 @@ public:
 void lexer(std::string & line);
 
 void parser();
+
+void Calculator();
 
 mapHandler *getMapH();
 

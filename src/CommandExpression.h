@@ -21,6 +21,7 @@ public:
 
     ~CommandExpression() override;
 
+    std::string stringify() override;
 
 };
 

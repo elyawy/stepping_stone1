@@ -23,3 +23,7 @@ Mul::Mul(std::string &left, std::string &right) : BinaryExpression(left, right) 
 Mul::Mul(Expression *left, std::string &right) : BinaryExpression(left, right) {
 
 }
+
+std::string Mul::stringify() {
+    return getLeftExp()->stringify() + " * " + getRightExp()->stringify();
+}

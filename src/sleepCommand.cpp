@@ -12,7 +12,8 @@ void sleepCommand::addMaps(mapHandler &mapHandler1) {
     mapH = mapHandler1;
 }
 
-void sleepCommand::addTokens(std::map<std::string, SECONDSTAGE> *tokenized1) {
-    tokenized = tokenized1;
-
+std::string sleepCommand::stringify() {
+    return std::__cxx11::string();
 }
+
+

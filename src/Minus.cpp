@@ -23,3 +23,7 @@ Minus::Minus(std::string &left, std::string &right) : BinaryExpression(left, rig
 Minus::Minus(Expression *left, std::string &right) : BinaryExpression(left, right) {
 
 }
+
+std::string Minus::stringify() {
+    return getLeftExp()->stringify() + " - " + getRightExp()->stringify();
+}

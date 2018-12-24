@@ -15,6 +15,8 @@ public:
     explicit Number(double number);
     double calculate(mapHandler &mapH) override;
     double getNum();
+
+    std::string stringify() override;
 };
 
 

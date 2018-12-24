@@ -15,8 +15,9 @@ public:
 
     ~OpenServerCommand() override;
 
+    std::string stringify() override;
+
     void addMaps(mapHandler &mapHandler1) override;
-    void addTokens(std::map<std::string , SECONDSTAGE > *tokenized1) override;
 
 };
 

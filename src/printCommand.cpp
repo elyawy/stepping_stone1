@@ -7,19 +7,14 @@
 #include <algorithm>
 
 void printCommand::execute() {
-    if (mapH.getExpressions()->count("evaluate")>0){
-        std::cout << mapH.getExpressions()->at("evaluate")->calculate(mapH) << std::endl;
-    }
-    if (mapH.getExpressions()->count("to_print")>0){
-        mapH.getExpressions()->at("to_print")->calculate(mapH);
-    }
+std::cout << mapH.getExpressions()->at(mapH.getToExecute()->front())->calculate(mapH) << std::endl;
+
 }
 
 void printCommand::addMaps(mapHandler &mapHandler1) {
     mapH = mapHandler1;
 }
 
-void printCommand::addTokens(std::map<std::string, SECONDSTAGE> *tokenized1) {
-    tokenized = tokenized1;
-
+std::string printCommand::stringify() {
+    return std::__cxx11::string();
 }

@@ -94,9 +94,9 @@ void OpenServerCommand::addMaps(mapHandler &mapHandler1) {
     mapH = mapHandler1;
 }
 
-void OpenServerCommand::addTokens(std::map<std::string, SECONDSTAGE> *tokenized1) {
-    tokenized = tokenized1;
-
+std::string OpenServerCommand::stringify() {
+    return std::__cxx11::string();
 }
+
 
 OpenServerCommand::~OpenServerCommand() = default;

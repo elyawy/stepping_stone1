@@ -13,13 +13,12 @@
 class conditionParser: public Command {
 protected:
     std::list<Expression*> commandList;
+    Expression * condition;
     Interpreter interpreter;
 public:
-
+    conditionParser();
     void execute() override;
     bool checkCondition();
-
-    void addTokens(std::map<std::string , SECONDSTAGE > *tokenized1) override;
 
 
     void addMaps(mapHandler &mapHandler1) override;

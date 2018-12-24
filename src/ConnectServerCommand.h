@@ -13,7 +13,8 @@ public:
     void execute() override;
 
     void addMaps(mapHandler &mapHandler1) override;
-    void addTokens(std::map<std::string , SECONDSTAGE > *tokenized1) override;
+
+    std::string stringify() override;
 };
 
 

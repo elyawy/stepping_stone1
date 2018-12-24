@@ -20,6 +20,8 @@ public:
     BinaryExpression(std::string &left, std::string &right);
     BinaryExpression(Expression* left, std::string &right);
 
+    std::string stringify() override;
+
     double calculate(mapHandler &mapH) override = 0;
     Expression* getLeftExp();
     Expression* getRightExp();

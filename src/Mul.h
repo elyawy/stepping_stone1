@@ -19,6 +19,8 @@ public:
     Mul(std::string &left, std::string &right);
 
     double calculate(mapHandler &mapH) override;
+
+    std::string stringify() override;
 };
 
 

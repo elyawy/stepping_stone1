@@ -13,6 +13,8 @@ class quotedExpression: public Expression {
 public:
     explicit quotedExpression(std::string &quote);
     double calculate(mapHandler &mapH) override;
+
+    std::string stringify() override;
 };
 
 

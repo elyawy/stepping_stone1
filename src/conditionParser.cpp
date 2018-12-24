@@ -22,7 +22,16 @@ void conditionParser::addMaps(mapHandler &mapHandler1) {
 }
 
 
-void conditionParser::addTokens(std::map<std::string, SECONDSTAGE> *tokenized1) {
-    tokenized = tokenized1;
 
+conditionParser::conditionParser() {
+    interpreter.getMapH()->setSymbleMap(mapH.getsymblTable());
+    std::string line;
+    do {
+        std::getline(std::cin, line);
+        if(line == "`") break;
+        if(line.empty()) continue;
+
+        interpreter.lexer(line);
+        interpreter.parser();
+    } while (!line.find('}'));
 }

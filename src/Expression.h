@@ -12,7 +12,10 @@
 class Expression {
 public:
     virtual double calculate(mapHandler &mapH) = 0;
-    virtual ~Expression(){};
+
+    virtual std::string stringify() = 0;
+
+    virtual ~Expression() = default;;
 };
 
 

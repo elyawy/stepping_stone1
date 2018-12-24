@@ -16,4 +16,8 @@ double Number::getNum() {
     return this->num;
 }
 
+std::string Number::stringify() {
+    return std::to_string(num);
+}
+
 

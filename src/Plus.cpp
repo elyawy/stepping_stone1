@@ -32,6 +32,10 @@ Plus::Plus(Expression *left, std::string &right) : BinaryExpression(left, right)
 
 }
 
+std::string Plus::stringify() {
+    return getLeftExp()->stringify() + " + " + getRightExp()->stringify();
+}
+
 
 
 

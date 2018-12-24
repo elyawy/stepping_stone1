@@ -16,9 +16,8 @@ void DefineVarCommand::addMaps(mapHandler &mapHandler1) {
     mapH = mapHandler1;
 }
 
-void DefineVarCommand::addTokens(std::map<std::string, SECONDSTAGE> *tokenized1) {
-    tokenized = tokenized1;
-
+std::string DefineVarCommand::stringify() {
+    return std::__cxx11::string();
 }
 
 

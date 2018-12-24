@@ -15,7 +15,12 @@ public:
     void setcomparator(std::string &comp);
     double calculate(mapHandler &mapH) override;
 
+    std::string stringify() override;
+
+    ~booleanExpression() override;
+
 };
+
 
 
 #endif //STEPPING_STONE1_BOOLEANEXPRESSION_H

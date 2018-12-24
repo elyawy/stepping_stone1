@@ -69,10 +69,6 @@ BinaryExpression::BinaryExpression(Expression *left, std::string &right) {
     }
 }
 
-
-
-
-
-
-
-
+std::string BinaryExpression::stringify() {
+    return leftExp->stringify() + rightExp->stringify();
+}

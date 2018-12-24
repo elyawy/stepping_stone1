@@ -15,6 +15,8 @@ private:
 public:
     explicit varExpression(std::string &var);
     double calculate(mapHandler &mapH) override;
+
+    std::string stringify() override;
 };
 
 

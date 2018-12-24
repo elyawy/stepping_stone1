@@ -13,3 +13,7 @@ quotedExpression::quotedExpression(std::string &quote) {
  std::string quoteless(quote.begin()+1, quote.end()-1);
  toPrint = quoteless;
 }
+
+std::string quotedExpression::stringify() {
+    return toPrint;
+}

@@ -17,23 +17,7 @@
 
 void Parser::parse(std::vector<std::string> &toParse,std::map<std::string , SECONDSTAGE > *tokenized) {
     tokens = tokenized;
-
     expressionFactory(toParse);
-
-    mapH.getExpressions()->at("command")->calculate(mapH);
-
-    std::map<std::string, Expression*>::iterator maper;
-
-    maper = mapH.getExpressions()->begin();
-    while (maper != mapH.getExpressions()->end()){
-
-        delete (*maper).second;
-        maper++;
-    }
-
-    mapH.getExpressions()->clear();
-    toParse.clear();
-    tokens->clear();
 }
 
 
@@ -57,21 +41,27 @@ void Parser::oneArg(std::vector<std::string> &toParse) {
 void Parser::expressionFactory(std::vector<std::string> &toParse) {
     int i = 0;
     while (i < toParse.size()) {
+        std::string id = std::to_string(i);
         if (mapH.getTokens()->at(toParse[i]) == TOEVALUTE) {
             Evaluator evaluator;
             Expression * exp = evaluator.analizer(toParse[i]);
-            mapH.getExpressions()->emplace("evaluate", exp);
+            mapH.getExpressions()->emplace(id, exp);
         } else if (mapH.getTokens()->at(toParse[i]) == KEYWORD){
             Expression * exp = keywordSorter(toParse[i]);
             toExecute.push_back(exp);
-            mapH.getExpressions()->emplace("command", exp);
+            mapH.getExpressions()->emplace(id, exp);
         } else if (mapH.getTokens()->at(toParse[i]) == VARIABLE){
-            if (i==0) {mapH.getExpressions()->emplace("command",new varExpression(toParse[i]));
-            } else mapH.getExpressions()->emplace("variable",new varExpression(toParse[i]));
+            if (i==0) {mapH.getExpressions()->emplace(id,new varExpression(toParse[i]));
+            } else mapH.getExpressions()->emplace(id,new varExpression(toParse[i]));
         } else if (mapH.getTokens()->at(toParse[i]) == QUOTED){
-            mapH.getExpressions()->emplace("to_print",new quotedExpression(toParse[i]));
+            mapH.getExpressions()->emplace(id,new quotedExpression(toParse[i]));
         }
         i++;
+    }
+    i = 0;
+    while(i < mapH.getExpressions()->size()){
+      mapH.getToExecute()->emplace(std::to_string(i));
+      i++;
     }
 }
 
@@ -82,5 +72,6 @@ Expression * Parser::keywordSorter(std::string &keyword) {
     if(keyword == "connect") return new CommandExpression(new ConnectServerCommand());
     if(keyword == "bind") return new CommandExpression(new bindCommand());
 }
+
 
 Parser::~Parser() = default;

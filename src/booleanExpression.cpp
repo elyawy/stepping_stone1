@@ -21,3 +21,11 @@ double booleanExpression::calculate(mapHandler &mapH) {
 void booleanExpression::setcomparator(std::string &comp) {
  compare = comp;
 }
+
+booleanExpression::~booleanExpression() {
+
+}
+
+std::string booleanExpression::stringify() {
+    return getLeftExp()->stringify() + compare + getRightExp()->stringify();
+}

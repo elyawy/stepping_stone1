@@ -12,6 +12,7 @@ void ConnectServerCommand::addMaps(mapHandler &mapHandler1) {
  mapH =mapHandler1;
 }
 
-void ConnectServerCommand::addTokens(std::map<std::string, SECONDSTAGE> *tokenized1) {
-  tokenized = tokenized1;
+std::string ConnectServerCommand::stringify() {
+ return std::__cxx11::string();
 }
+
