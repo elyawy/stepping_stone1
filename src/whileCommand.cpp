@@ -5,9 +5,9 @@
 #include <iostream>
 #include "whileCommand.h"
 
-void whileCommand::execute(std::vector<std::string>::iterator &iter) {
-    bool condition = checkCondition(iter);
-    checkCondition(iter);
+void whileCommand::execute() {
+    bool condition = checkCondition();
+    checkCondition();
 
 }
 

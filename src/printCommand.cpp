@@ -6,7 +6,7 @@
 #include "printCommand.h"
 #include <algorithm>
 
-void printCommand::execute(std::vector<std::string>::iterator &iter) {
+void printCommand::execute() {
     if (mapH.getExpressions()->count("evaluate")>0){
         std::cout << mapH.getExpressions()->at("evaluate")->calculate(mapH) << std::endl;
     }

@@ -4,7 +4,7 @@
 
 #include "sleepCommand.h"
 
-void sleepCommand::execute(std::vector<std::string>::iterator &iter) {
+void sleepCommand::execute() {
 
 }
 

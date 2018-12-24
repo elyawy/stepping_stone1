@@ -18,7 +18,7 @@ protected:
     std::map<std::string , SECONDSTAGE > *tokenized;
 public:
 
-    virtual void execute(std::vector<std::string>::iterator &iter){}
+    virtual void execute(){}
     virtual ~Command() = default;
 
     virtual void addTokens(std::map<std::string , SECONDSTAGE > *tokenized1){}

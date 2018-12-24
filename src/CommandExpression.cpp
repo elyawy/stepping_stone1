@@ -5,9 +5,8 @@
 #include "CommandExpression.h"
 
 double CommandExpression::calculate(mapHandler &mapH) {
-    std::vector<std::string>::iterator iter;
     command->addMaps(mapH);
-    command->execute(iter);
+    command->execute();
 //need to find a way to send iterator, before we can enable method.
 }
 

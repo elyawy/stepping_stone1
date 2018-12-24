@@ -12,7 +12,7 @@
 class printCommand: public Command {
     Expression * expression;
 public:
-    void execute(std::vector<std::string>::iterator &iter) override;
+    void execute() override;
 
     void addMaps(mapHandler &mapHandler1) override;
 

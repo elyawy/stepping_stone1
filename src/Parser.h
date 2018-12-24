@@ -20,7 +20,7 @@ std::map<std::string , SECONDSTAGE > *tokens;
 std::vector<Expression*> toExecute;
 Evaluator evaluator;
 public:
-    void parse( std::vector<std::string> &toParse , std::map<std::string , SECONDSTAGE > *tokenized);
+    void parse(std::vector<std::string> &toParse , std::map<std::string , SECONDSTAGE > *tokenized);
     void addMaps(mapHandler &mapHandler1);
 
     void twoArgs( std::vector<std::string> &toParse);

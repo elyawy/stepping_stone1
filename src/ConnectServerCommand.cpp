@@ -4,7 +4,7 @@
 
 #include "ConnectServerCommand.h"
 
-void ConnectServerCommand::execute(std::vector<std::string>::iterator &iter) {
+void ConnectServerCommand::execute() {
 
 }
 

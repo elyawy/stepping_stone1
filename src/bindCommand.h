@@ -10,7 +10,7 @@
 
 class bindCommand: public Command {
 public:
-    void execute(std::vector<std::string>::iterator &iter) override;
+    void execute() override;
 
     ~bindCommand() override;
 

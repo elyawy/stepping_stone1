@@ -16,8 +16,6 @@
 #include "varExpression.h"
 
 void Parser::parse(std::vector<std::string> &toParse,std::map<std::string , SECONDSTAGE > *tokenized) {
-    std::vector<std::string>::iterator iter;
-
     tokens = tokenized;
 
     expressionFactory(toParse);
@@ -25,6 +23,7 @@ void Parser::parse(std::vector<std::string> &toParse,std::map<std::string , SECO
     mapH.getExpressions()->at("command")->calculate(mapH);
 
     std::map<std::string, Expression*>::iterator maper;
+
     maper = mapH.getExpressions()->begin();
     while (maper != mapH.getExpressions()->end()){
 

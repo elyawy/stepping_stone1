@@ -5,7 +5,7 @@
 #include <iostream>
 #include "DefineVarCommand.h"
 
-void DefineVarCommand::execute(std::vector<std::string>::iterator &iter) {
+void DefineVarCommand::execute() {
     mapH.getExpressions()->at("variable")->calculate(mapH);
 
 //iter++;
