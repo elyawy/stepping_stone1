@@ -29,16 +29,14 @@ Expression *Evaluator::analizer(std::string &express) {
             i++;
             break;
         } else break;
-        // booleanExpression creator.
-
-        // return boolean expression.
        }
         left+= express[i];
         i++;
     }
     if (!boolean.empty()) {
         while (i < express.size()) {
-            left += express[i];
+            right += express[i];
+            i++;
         }
     }
     if (boolean.empty()) return shuntingYard(left);
@@ -86,7 +84,11 @@ Expression *Evaluator::shuntingYard(std::string &express1) {
         if (express[i].empty()) {i++;continue;}
         if (express[i] == " ") {i++;
             continue;}
-        if (isNum(express[i]) == 1) {queue.push(express[i]); i++;}
+        if (isNum(express[i]) == 1) {
+            queue.push(express[i]);
+            i++;
+            if (i >= express.size()) break;
+        }
         if (isOperator(express[i])) {
             if (!stack.empty()){
                 while(!stack.empty()) {

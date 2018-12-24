@@ -151,7 +151,7 @@ void Lexer::Words(std::string &line, int &i) {
         }
         temp  += line[i];
         i++;
-        if (i >= line.size()) throw "lexing gone wrong";
+        if (i >= line.size()) break;
     }
     if (isCommand(temp)) {
         scanned_list.emplace(temp, KEYWORD);
@@ -207,13 +207,21 @@ void Lexer::equals(std::string &line, int &i) {
     }
     int j = i;
     if (token_list.at(i) == LETTER){
-        for (int k = 0; k < 5; k++) {
-            temp += line[i]; i++;
-        }
-            if (temp == "bind ") {
+        while (i < line.size() && line[i] != ' '){
+            temp += line[i];
+            i++;
+            }
+            if (temp == "bind") {
                 scanned_list.emplace(temp, KEYWORD);
                 toParse->push_back(temp);
-            } else i = j;
+            } else {
+                while (i < line.size()){
+                    temp += line[i];
+                    i++;
+                }
+                scanned_list.emplace(temp, TOEVALUTE);
+                toParse->push_back(temp);
+            }
         } else {
         while (i < line.size()) {
             temp += line[i];
@@ -264,7 +272,7 @@ std::map<std::string, SECONDSTAGE> *Lexer::getTOKENS() {
 }
 
 bool Lexer::isCommand(std::string &temp){
-
-    return temp == "print" || "openDataServer" || "var" || "connect" || "while" || "sleep" || "if";
+    return temp == "print" || temp == "openDataServer" || temp == "var" ||
+    temp == "connect" || temp == "while" || temp == "sleep" || temp == "if";
 
 }

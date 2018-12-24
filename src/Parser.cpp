@@ -7,26 +7,27 @@
 
 #include "Parser.h"
 #include "Command.h"
-#include "CommandExpression.h"
 #include "printCommand.h"
 #include "DefineVarCommand.h"
 #include "OpenServerCommand.h"
 #include "ConnectServerCommand.h"
 #include "bindCommand.h"
 #include "quotedExpression.h"
+#include "varExpression.h"
 
 void Parser::parse(std::vector<std::string> &toParse,std::map<std::string , SECONDSTAGE > *tokenized) {
     std::vector<std::string>::iterator iter;
-    std::vector<CommandExpression*> toExecute;
+
     tokens = tokenized;
 
     expressionFactory(toParse);
 
-    mapH.getExpressions()->at("print")->calculate(mapH);
+    mapH.getExpressions()->at("command")->calculate(mapH);
 
     std::map<std::string, Expression*>::iterator maper;
     maper = mapH.getExpressions()->begin();
     while (maper != mapH.getExpressions()->end()){
+
         delete (*maper).second;
         maper++;
     }
@@ -59,11 +60,15 @@ void Parser::expressionFactory(std::vector<std::string> &toParse) {
     while (i < toParse.size()) {
         if (mapH.getTokens()->at(toParse[i]) == TOEVALUTE) {
             Evaluator evaluator;
-            mapH.getExpressions()->emplace("evaluate", evaluator.analizer(toParse[i]));
+            Expression * exp = evaluator.analizer(toParse[i]);
+            mapH.getExpressions()->emplace("evaluate", exp);
         } else if (mapH.getTokens()->at(toParse[i]) == KEYWORD){
-            mapH.getExpressions()->emplace(toParse[i], keywordSorter(toParse[i]));
+            Expression * exp = keywordSorter(toParse[i]);
+            toExecute.push_back(exp);
+            mapH.getExpressions()->emplace("command", exp);
         } else if (mapH.getTokens()->at(toParse[i]) == VARIABLE){
-            mapH.getExpressions()->emplace(toParse[i],new CommandExpression(new DefineVarCommand));
+            if (i==0) {mapH.getExpressions()->emplace("command",new varExpression(toParse[i]));
+            } else mapH.getExpressions()->emplace("variable",new varExpression(toParse[i]));
         } else if (mapH.getTokens()->at(toParse[i]) == QUOTED){
             mapH.getExpressions()->emplace("to_print",new quotedExpression(toParse[i]));
         }

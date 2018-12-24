@@ -10,12 +10,14 @@
 #include "Expression.h"
 #include "Lexer.h"
 #include "Evaluator.h"
+#include "CommandExpression.h"
 
 
 class Parser {
 private:
 mapHandler mapH;
 std::map<std::string , SECONDSTAGE > *tokens;
+std::vector<Expression*> toExecute;
 Evaluator evaluator;
 public:
     void parse( std::vector<std::string> &toParse , std::map<std::string , SECONDSTAGE > *tokenized);
