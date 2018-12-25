@@ -11,9 +11,9 @@
 
 
 enum TOKENS{Bracketstart, CurlBracketstart,Bracketend,CurlBracketend,
-        quote, number, ADD, SUBSTRACT,DIVIDE,MULTIPLY, EQUAL, SPACE, LETTER, Conditional, OTHER };
+        quote, number, ADD, SUBSTRACT,DIVIDE,MULTIPLY, EQUAL, SPACE, LETTER, Conditional, OTHER, POINT };
 
-enum SECONDSTAGE {VARIABLE, KEYWORD, TOEVALUTE, QUOTED, FUNCSTART, FUNCEND, EQUALS};
+enum SECONDSTAGE {VARIABLE, KEYWORD, TOEVALUTE, QUOTED, FUNCSTART, FUNCEND, EQUALS, IP};
 
 class Lexer {
     std::map<int , TOKENS > token_list;
@@ -33,6 +33,8 @@ public:
     void Parethesis(std::string &line, int &i);
 
     void Words(std::string &line, int &i);
+
+    void Ip(std::string &line, int &i);
 
     void Express(std::string &line, int &i);
 

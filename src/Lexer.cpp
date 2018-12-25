@@ -81,6 +81,8 @@ void Lexer::tokenize(char &a,int location) {
             return;
         case ' ': token_list.emplace(location, SPACE);
             return;
+        case '.': token_list.emplace(location, POINT);
+            return;
         default:
             break;
     }
@@ -158,8 +160,13 @@ void Lexer::Words(std::string &line, int &i) {
         toParse->push_back(temp);
         if (temp == "openDataServer" || temp == "connect"){
             i++;
-            Express(line, i);
-            Express(line,i);
+            if (temp == "connect"){
+                Ip(line,i);
+                Express(line, i);
+            } else {
+                Express(line, i);
+                Express(line, i);
+            }
         }
         if (temp == "while" || temp == "if"){
             i++;
@@ -277,4 +284,17 @@ bool Lexer::isCommand(std::string &temp){
     return temp == "print" || temp == "openDataServer" || temp == "var" ||
     temp == "connect" || temp == "while" || temp == "sleep" || temp == "if";
 
+}
+
+void Lexer::Ip(std::string &line, int &i) {
+    std::string temp = "";
+    while (token_list.at(i) == SPACE){
+        i++;
+    }
+    while (token_list.at(i) != SPACE){
+        temp+= line[i];
+        i++;
+    }
+    scanned_list.emplace(temp, IP);
+    toParse->push_back(temp);
 }
