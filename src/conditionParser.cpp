@@ -32,15 +32,25 @@ void conditionParser::loopInitializer() {
     std::string line;
     do {
         std::getline(std::cin, line);
-        if(line == "`") break;
+        if (line.find('}') != std::string::npos) break;
         if(line.empty()) continue;
-
-        interpreter.lexer(line);
-        interpreter.parser();
-    } while (!line.find('}'));
+        commandList.push_back(line);
+    } while (line.find('}') == std::string::npos);
 }
 
 void conditionParser::jump() {
     mapH.getParsed()->push(mapH.getparseQueue()->front());
     mapH.getparseQueue()->pop();
+}
+
+void conditionParser::loopStarter() {
+    int i = 0;
+    while (i < commandList.size()){
+        std::string line = commandList[i];
+        i++;
+        if(line.empty()) continue;
+        interpreter.lexer(line);
+        interpreter.parser();
+        interpreter.Calculator();
+    }
 }

@@ -9,10 +9,9 @@ void whileCommand::execute() {
     loopInitializer();
 
     while (checkCondition()){
-        interpreter.Calculator();
-        interpreter.getMapH()->setparseQueue(interpreter.getMapH()->getParsed());
-        interpreter.getMapH()->setParsed(interpreter.getMapH()->getparseQueue());
+        loopStarter();
     }
+    jump();
 }
 
 void whileCommand::addMaps(mapHandler &mapHandler1) {

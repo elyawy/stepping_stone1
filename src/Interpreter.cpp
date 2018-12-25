@@ -32,18 +32,14 @@ mapHandler *Interpreter::getMapH() {
 }
 
 void Interpreter::Calculator() {
+    mapH.setParsed(&parsed);
+    mapH.setparseQueue(&parseQueue);
+
     mapH.getExpressions()->at(parseQueue.front())->calculate(mapH);
+
 
     std::map<std::string, Expression*>::iterator maper;
 
-//    maper = mapH.getExpressions()->begin();
-//    while (maper != mapH.getExpressions()->end()){
-//        if (mapH.getExpressions())
-//        delete (*maper).second;
-//        maper++;
-//    }
-
-//    mapH.getExpressions()->clear();
     mapH.gettoParse()->clear();
     mapH.getTokens()->clear();
 }

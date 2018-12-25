@@ -5,7 +5,10 @@
 #include "ifCommand.h"
 
 void ifCommand::execute() {
-    Command::execute();
+    loopInitializer();
+
+    if (checkCondition()) loopStarter();
+    jump();
 }
 
 void ifCommand::addMaps(mapHandler &mapHandler1) {

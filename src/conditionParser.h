@@ -7,12 +7,11 @@
 
 
 #include "Command.h"
-#include "list"
 #include "Interpreter.h"
 
 class conditionParser: public Command {
 protected:
-    std::list<Expression*> commandList;
+    std::vector<std::string> commandList;
     Expression * condition;
     Interpreter interpreter;
 public:
@@ -21,6 +20,9 @@ public:
     bool checkCondition();
 
     void loopInitializer();
+
+    void loopStarter();
+
     void addMaps(mapHandler &mapHandler1) override;
 
     void jump() override;

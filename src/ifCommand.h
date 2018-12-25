@@ -7,8 +7,9 @@
 
 
 #include "Command.h"
+#include "conditionParser.h"
 
-class ifCommand: public Command {
+class ifCommand: public conditionParser {
 public:
     void execute() override;
 
