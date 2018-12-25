@@ -10,12 +10,11 @@ int main() {
 
         do {
         std::getline(std::cin, line);
-        if(line == "`") break;
+        if(line == "`" || line.find("exit") != std::string::npos) break;
         if(line.empty()) continue;
-
         i.lexer(line);
         i.parser();
         i.Calculator();
-    } while (line != "`");
+    } while (line != "`" || line.find("exit") == std::string::npos);
     return 0;
 }

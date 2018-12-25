@@ -54,13 +54,19 @@ Expression *Evaluator::shuntingYard(std::string &express1) {
     for (int j = 0; j < express1.size(); j++) {
         std::string temp;
         if (express1[j] == ' ') continue;
-        while (isalpha(express1[j])){
-            temp += express1[j];
-            j++;
-            if (!isalpha(express1[j])) {express.push_back(temp);temp = "";break;}
+        if (isalpha(express1[j])){
+            std::string check;
+            check += express1[j];
+            while(express1[j] != ' ' && !isOperator(check) && j < express1.size()){
+                check.clear();
+                temp += express1[j];
+                j++;
+                check+= express1[j];
+            if (express1[j] == ' ' || isOperator(check) || j >= express1.size()) {express.push_back(temp);temp = "";break;}
+        } if (j >= express1.size()) break;
         }
         if (express1[j] == ' ') continue;
-        if (!isdigit(express1[j]) && j < express1.size()) {
+        if (!isdigit(express1[j]) && j < express1.size() && express1[j] != '_') {
             temp += express1[j];
             express.push_back(temp);
             continue;}
@@ -152,7 +158,7 @@ int Evaluator::operatorValue(std::string &a) {
 bool Evaluator::isOperator(std::string &a) {
     if(a.empty()) return false;
     if (a == "(" || a == ")") return false;
-    return a == "+" || "-" || "/" || "*";
+    return a == "+" || a == "-" || a == "/" || a == "*";
 
 }
 
