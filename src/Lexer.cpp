@@ -200,6 +200,8 @@ void Lexer::Express(std::string &line, int &i) {
 }
 
 void Lexer::equals(std::string &line, int &i) {
+    scanned_list.emplace("=", EQUALS);
+    toParse->push_back("=");
     std::string temp = "";
     i++;
     while(token_list.at(i) == SPACE) {

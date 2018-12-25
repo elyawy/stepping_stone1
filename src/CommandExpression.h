@@ -8,6 +8,7 @@
 
 #include "Expression.h"
 #include "Command.h"
+#include <vector>
 
 
 class CommandExpression: public Expression {

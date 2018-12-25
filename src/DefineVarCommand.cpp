@@ -6,10 +6,29 @@
 #include "DefineVarCommand.h"
 
 void DefineVarCommand::execute() {
-    mapH.getExpressions()->at("variable")->calculate(mapH);
-
-//iter++;
-//mapH.getsymblTable()->emplace(*iter, 0);
+    std::string var = mapH.getparseQueue()->front();
+    if (mapH.getsymblTable()->count(var) == 0) {
+        mapH.getParsed()->push(mapH.getparseQueue()->front());
+        mapH.getparseQueue()->pop();
+        if (!mapH.getparseQueue()->empty()){
+            if (mapH.getparseQueue()->front() == "=") {
+                mapH.getParsed()->push(mapH.getparseQueue()->front());
+                mapH.getparseQueue()->pop();
+                if (!mapH.getparseQueue()->empty()){
+                    if (mapH.getparseQueue()->front() == "bind") {
+                        mapH.getExpressions()->at(mapH.getparseQueue()->front())->calculate(mapH);
+                    } else {
+                        double x = mapH.getExpressions()->at(mapH.getparseQueue()->front())->calculate(mapH);
+                        mapH.getsymblTable()->emplace(var,x);
+                        mapH.getParsed()->push(mapH.getparseQueue()->front());
+                        mapH.getparseQueue()->pop();
+                    }
+                }
+            } else {
+                mapH.getsymblTable()->emplace(var, 0);
+            }
+        }
+    } else throw "can't initialize same variable twice";
 }
 
 void DefineVarCommand::addMaps(mapHandler &mapHandler1) {

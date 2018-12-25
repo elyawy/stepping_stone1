@@ -7,13 +7,15 @@
 int main() {
     std::string line;
     Interpreter i;
+
         do {
         std::getline(std::cin, line);
         if(line == "`") break;
         if(line.empty()) continue;
+
         i.lexer(line);
         i.parser();
-        //i.Calculator();
+        i.Calculator();
     } while (line != "`");
     return 0;
 }

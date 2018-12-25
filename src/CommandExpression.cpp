@@ -5,11 +5,10 @@
 #include "CommandExpression.h"
 
 double CommandExpression::calculate(mapHandler &mapH) {
-    mapH.getExecuted()->push(mapH.getToExecute()->front());
-    mapH.getToExecute()->pop();
+    mapH.getParsed()->push(mapH.getparseQueue()->front());
+    mapH.getparseQueue()->pop();
     command->addMaps(mapH);
     command->execute();
-//need to find a way to send iterator, before we can enable method.
 }
 
 CommandExpression::~CommandExpression(){

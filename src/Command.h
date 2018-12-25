@@ -24,6 +24,8 @@ public:
 
     virtual std::string stringify() = 0;
 
+    virtual void jump(){}
+
 };
 
 

@@ -17,6 +17,10 @@ public:
     double calculate(mapHandler &mapH) override;
 
     std::string stringify() override;
+
+    void jump(mapHandler &mapH) override;
+
+    ~varExpression() override = default;
 };
 
 

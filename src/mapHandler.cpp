@@ -52,21 +52,25 @@ std::map<std::string, Expression *> *mapHandler::getExpressions() {
     return expressList;
 }
 
-void mapHandler::setExectued(std::queue<std::string> *executed1) {
-executed = executed1;
+void mapHandler::setParsed(std::queue<std::string> *Parsed) {
+    parsed = Parsed;
 }
 
-void mapHandler::setToexecute(std::queue<std::string> *toExecute1) {
-toExecute = toExecute1;
+std::queue<std::string> *mapHandler::getParsed() {
+    return parsed;
 }
 
-std::queue<std::string> *mapHandler::getToExecute() {
-    return toExecute;
+void mapHandler::setparseQueue(std::queue<std::string> *parse1) {
+    parseQueue =parse1;
 }
 
-std::queue<std::string> *mapHandler::getExecuted() {
-    return executed;
+std::queue<std::string> *mapHandler::getparseQueue() {
+    return parseQueue;
 }
+
+
+
+
 
 
 

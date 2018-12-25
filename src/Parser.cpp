@@ -14,9 +14,16 @@
 #include "bindCommand.h"
 #include "quotedExpression.h"
 #include "varExpression.h"
+#include "whileCommand.h"
+#include "redefineVarCommand.h"
 
 void Parser::parse(std::vector<std::string> &toParse,std::map<std::string , SECONDSTAGE > *tokenized) {
     tokens = tokenized;
+    while(toParse.empty()){
+        mapH.getparseQueue()->push(toParse.front());
+        toParse.erase(toParse.begin());
+    }
+
     expressionFactory(toParse);
 }
 
@@ -41,27 +48,27 @@ void Parser::oneArg(std::vector<std::string> &toParse) {
 void Parser::expressionFactory(std::vector<std::string> &toParse) {
     int i = 0;
     while (i < toParse.size()) {
-        std::string id = std::to_string(i);
         if (mapH.getTokens()->at(toParse[i]) == TOEVALUTE) {
+            if (mapH.getExpressions()->count(toParse[i])>0) mapH.getExpressions()->erase(toParse[i]);
             Evaluator evaluator;
             Expression * exp = evaluator.analizer(toParse[i]);
-            mapH.getExpressions()->emplace(id, exp);
-        } else if (mapH.getTokens()->at(toParse[i]) == KEYWORD){
+            mapH.getExpressions()->emplace(toParse[i], exp);
+        } else if (mapH.getTokens()->at(toParse[i]) == KEYWORD && mapH.getExpressions()->count(toParse[i])==0){
             Expression * exp = keywordSorter(toParse[i]);
             toExecute.push_back(exp);
-            mapH.getExpressions()->emplace(id, exp);
+            mapH.getExpressions()->emplace(toParse[i], exp);
         } else if (mapH.getTokens()->at(toParse[i]) == VARIABLE){
-            if (i==0) {mapH.getExpressions()->emplace(id,new varExpression(toParse[i]));
-            } else mapH.getExpressions()->emplace(id,new varExpression(toParse[i]));
+            if (mapH.getExpressions()->count(toParse[i])>0) mapH.getExpressions()->erase(toParse[i]);
+            mapH.getExpressions()->emplace(toParse[i],new CommandExpression(new redefineVarCommand()));
         } else if (mapH.getTokens()->at(toParse[i]) == QUOTED){
-            mapH.getExpressions()->emplace(id,new quotedExpression(toParse[i]));
+            if (mapH.getExpressions()->count(toParse[i])>0) mapH.getExpressions()->erase(toParse[i]);
+            mapH.getExpressions()->emplace(toParse[i],new quotedExpression(toParse[i]));
         }
         i++;
     }
-    i = 0;
-    while(i < mapH.getExpressions()->size()){
-      mapH.getToExecute()->emplace(std::to_string(i));
-      i++;
+    while(!toParse.empty()){
+      mapH.getparseQueue()->push(toParse.front());
+      toParse.erase(toParse.begin());
     }
 }
 
@@ -71,6 +78,8 @@ Expression * Parser::keywordSorter(std::string &keyword) {
     if(keyword == "openDataServer") return new CommandExpression(new OpenServerCommand());
     if(keyword == "connect") return new CommandExpression(new ConnectServerCommand());
     if(keyword == "bind") return new CommandExpression(new bindCommand());
+    if(keyword == "while") return new CommandExpression(new whileCommand());
+    if(keyword == "if") return new CommandExpression(new whileCommand());
 }
 
 

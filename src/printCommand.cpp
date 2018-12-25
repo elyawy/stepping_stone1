@@ -7,8 +7,14 @@
 #include <algorithm>
 
 void printCommand::execute() {
-std::cout << mapH.getExpressions()->at(mapH.getToExecute()->front())->calculate(mapH) << std::endl;
-
+    if (mapH.getTokens()->at(mapH.getparseQueue()->front()) == QUOTED) {
+        mapH.getExpressions()->at(mapH.getparseQueue()->front())->calculate(mapH);
+    } else {
+        double x = mapH.getExpressions()->at(mapH.getparseQueue()->front())->calculate(mapH);
+        std::cout << x << std::endl;
+        mapH.getParsed()->push(mapH.getparseQueue()->front());
+        mapH.getparseQueue()->pop();
+    }
 }
 
 void printCommand::addMaps(mapHandler &mapHandler1) {

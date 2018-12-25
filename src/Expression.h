@@ -16,6 +16,9 @@ public:
     virtual std::string stringify() = 0;
 
     virtual ~Expression() = default;;
+
+    virtual void jump(mapHandler &mapH){}
+
 };
 
 

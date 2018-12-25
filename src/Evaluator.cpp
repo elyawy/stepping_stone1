@@ -163,6 +163,7 @@ Expression *Evaluator::expressionBuilder(std::vector<std::string> &queue) {
             return new Number(x);
         }
         if (isalpha(queue.back().at(0))){
+
             return new varExpression(queue.back());
         }
     }

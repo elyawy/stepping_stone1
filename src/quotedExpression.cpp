@@ -6,6 +6,8 @@
 #include "quotedExpression.h"
 
 double quotedExpression::calculate(mapHandler &mapH) {
+    mapH.getParsed()->push(mapH.getparseQueue()->front());
+    mapH.getparseQueue()->pop();
     std::cout << toPrint << std::endl;
 }
 

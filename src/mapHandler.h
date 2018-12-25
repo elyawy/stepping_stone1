@@ -19,28 +19,29 @@ private:
     std::map<std::string, std::string> *vartoBindTable;
     std::map<std::string, std::string> *bindtoVarTable;
     std::vector<std::string> *toParse;
-    std::map<std::string, SECONDSTAGE > *tokens;
+    std::queue<std::string> *parseQueue;
+    std::queue<std::string> *parsed;
+    std::map<std::string, SECONDSTAGE> *tokens;
     std::map<std::string, Expression*> *expressList;
-    std::queue<std::string> *toExecute;
-    std::queue<std::string> *executed;
+
 public:
     void setSymbleMap(std::map<std::string, double> *symblTable1);
     void setvartobindMap(std::map<std::string, std::string> *vartoBindTable1);
     void setbindtovarMap(std::map<std::string, std::string> *bindtoVarTable1);
     void settoParse(std::vector<std::string> *toParse);
+    void setParsed(std::queue<std::string> *toParse);
+    void setparseQueue(std::queue<std::string> *parse1);
     void setTokens(std::map<std::string, SECONDSTAGE> *tokens1);
     void setExpresssions(std::map<std::string, Expression*> *expressList1);
-    void setToexecute(std::queue<std::string>*toExecute);
-    void setExectued(std::queue<std::string> *executed);
 
 
-    std::queue<std::string> *getToExecute();
-    std::queue<std::string> *getExecuted();
     std::map<std::string, SECONDSTAGE > *getTokens();
     std::map<std::string, std::string> * getbindtovarMap();
     std::map<std::string, std::string> * getvartobindMap();
     std::map<std::string, double> * getsymblTable();
     std::vector<std::string> *gettoParse();
+    std::queue<std::string> *getParsed();
+    std::queue<std::string> *getparseQueue();
     std::map<std::string, Expression*> *getExpressions();
 };
 
