@@ -45,6 +45,3 @@ void Interpreter::Calculator() {
 }
 
 Interpreter::~Interpreter() = default;
-
-
-

@@ -17,8 +17,7 @@ class Parser {
 private:
 mapHandler mapH;
 std::map<std::string , SECONDSTAGE > *tokens;
-std::vector<Expression*> toExecute;
-Evaluator evaluator;
+std::queue<Expression*> toDelete;
 public:
     void parse(std::vector<std::string> &toParse , std::map<std::string , SECONDSTAGE > *tokenized);
     void addMaps(mapHandler &mapHandler1);

@@ -53,20 +53,25 @@ void Parser::expressionFactory(std::vector<std::string> &toParse) {
             if (mapH.getExpressions()->count(toParse[i])>0) mapH.getExpressions()->erase(toParse[i]);
             Evaluator evaluator;
             Expression * exp = evaluator.analizer(toParse[i]);
+            toDelete.push(exp);
             mapH.getExpressions()->emplace(toParse[i], exp);
         } else if (mapH.getTokens()->at(toParse[i]) == KEYWORD && mapH.getExpressions()->count(toParse[i])==0){
             if (toParse[i] == "while" || toParse[i] == "if"){
                 if (mapH.getTokens()->at(toParse[i+2]) != FUNCSTART || mapH.getTokens()->at(toParse[i+1]) != TOEVALUTE) throw "invalid syntax";
             }
             Expression * exp = keywordSorter(toParse[i]);
-            toExecute.push_back(exp);
             mapH.getExpressions()->emplace(toParse[i], exp);
+            toDelete.push(exp);
         } else if (mapH.getTokens()->at(toParse[i]) == VARIABLE){
             if (mapH.getExpressions()->count(toParse[i])>0) mapH.getExpressions()->erase(toParse[i]);
-            mapH.getExpressions()->emplace(toParse[i],new CommandExpression(new redefineVarCommand()));
+            Expression * exp = new CommandExpression(new redefineVarCommand());
+            mapH.getExpressions()->emplace(toParse[i],exp);
+            toDelete.push(exp);
         } else if (mapH.getTokens()->at(toParse[i]) == QUOTED){
             if (mapH.getExpressions()->count(toParse[i])>0) mapH.getExpressions()->erase(toParse[i]);
-            mapH.getExpressions()->emplace(toParse[i],new quotedExpression(toParse[i]));
+            Expression * exp = new quotedExpression(toParse[i]);
+            mapH.getExpressions()->emplace(toParse[i],exp);
+            toDelete.push(exp);
         }
         i++;
     }
@@ -87,4 +92,10 @@ Expression * Parser::keywordSorter(std::string &keyword) {
 }
 
 
-Parser::~Parser() = default;
+Parser::~Parser(){
+
+while (!toDelete.empty()){
+ delete toDelete.front();
+    toDelete.pop();
+}
+}
