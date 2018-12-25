@@ -16,6 +16,7 @@
 #include "varExpression.h"
 #include "whileCommand.h"
 #include "redefineVarCommand.h"
+#include "ifCommand.h"
 
 void Parser::parse(std::vector<std::string> &toParse,std::map<std::string , SECONDSTAGE > *tokenized) {
     tokens = tokenized;
@@ -54,6 +55,9 @@ void Parser::expressionFactory(std::vector<std::string> &toParse) {
             Expression * exp = evaluator.analizer(toParse[i]);
             mapH.getExpressions()->emplace(toParse[i], exp);
         } else if (mapH.getTokens()->at(toParse[i]) == KEYWORD && mapH.getExpressions()->count(toParse[i])==0){
+            if (toParse[i] == "while" || toParse[i] == "if"){
+                if (mapH.getTokens()->at(toParse[i+2]) != FUNCSTART || mapH.getTokens()->at(toParse[i+1]) != TOEVALUTE) throw "invalid syntax";
+            }
             Expression * exp = keywordSorter(toParse[i]);
             toExecute.push_back(exp);
             mapH.getExpressions()->emplace(toParse[i], exp);
@@ -78,8 +82,8 @@ Expression * Parser::keywordSorter(std::string &keyword) {
     if(keyword == "openDataServer") return new CommandExpression(new OpenServerCommand());
     if(keyword == "connect") return new CommandExpression(new ConnectServerCommand());
     if(keyword == "bind") return new CommandExpression(new bindCommand());
-    if(keyword == "while") return new CommandExpression(new whileCommand());
-    if(keyword == "if") return new CommandExpression(new whileCommand());
+    if(keyword == "while") {return new CommandExpression(new whileCommand());}
+    if(keyword == "if") return new CommandExpression(new ifCommand());
 }
 
 

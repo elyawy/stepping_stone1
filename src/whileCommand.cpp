@@ -6,8 +6,13 @@
 #include "whileCommand.h"
 
 void whileCommand::execute() {
-    bool condition = checkCondition();
+    loopInitializer();
 
+    while (checkCondition()){
+        interpreter.Calculator();
+        interpreter.getMapH()->setparseQueue(interpreter.getMapH()->getParsed());
+        interpreter.getMapH()->setParsed(interpreter.getMapH()->getparseQueue());
+    }
 }
 
 void whileCommand::addMaps(mapHandler &mapHandler1) {

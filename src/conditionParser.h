@@ -20,8 +20,10 @@ public:
     void execute() override;
     bool checkCondition();
 
-
+    void loopInitializer();
     void addMaps(mapHandler &mapHandler1) override;
+
+    void jump() override;
 
 };
 

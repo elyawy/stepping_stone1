@@ -45,6 +45,8 @@ mapHandler *getMapH();
 
 ~Interpreter();
 
+void setSymblTable();
+
 };
 
 
