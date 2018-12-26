@@ -24,6 +24,7 @@ private:
     std::map<std::string, SECONDSTAGE> *tokens;
     std::map<std::string, Expression*> *expressList;
     std::ifstream *myfile;
+    std::queue<std::string> *updated;
 
 public:
     void setSymbleMap(std::map<std::string, double> *symblTable1);
@@ -34,6 +35,10 @@ public:
     void setTokens(std::map<std::string, SECONDSTAGE> *tokens1);
     void setExpresssions(std::map<std::string, Expression*> *expressList1);
     void setStream(std::ifstream *file);
+    void setUpdated(std::queue<std::string> *update);
+
+
+    std::queue<std::string> *getUpdated();
 
     std::ifstream *getStream();
     std::map<std::string, SECONDSTAGE > *getTokens();

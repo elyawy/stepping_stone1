@@ -28,20 +28,32 @@ void conditionParser::addMaps(mapHandler &mapHandler1) {
 conditionParser::conditionParser() = default;
 
 void conditionParser::loopInitializer() {
-    if (!commandList.empty()) return;
     condition = mapH.getExpressions()->at(mapH.getparseQueue()->front());
     interpreter.getMapH()->setSymbleMap(mapH.getsymblTable());
+
     jump();
     std::string line;
     interpreter.getMapH()->setStream(mapH.getStream());
+    if (mapH.getparseQueue()->front() != "{") {
+        do {
+            if (mapH.getStream()->is_open()) {
+                std::getline(*mapH.getStream(), line);
+            } else std::getline(std::cin, line);
+            if (line.empty()) continue;
+        } while (line.find('{') == std::string::npos && !mapH.getStream()->eof());
+        if (mapH.getStream()->eof()) throw "invalid syntax";
+        level++;
+    }
     do {
         if (mapH.getStream()->is_open()){
             std::getline(*mapH.getStream(), line);
         } else std::getline(std::cin, line);
-        if (line.find('}') != std::string::npos) break;
         if(line.empty()) continue;
         commandList.push_back(line);
-    } while (line.find('}') == std::string::npos);
+    }while (line.find('}') == std::string::npos && !mapH.getStream()->eof());
+    level--;
+
+
 }
 
 void conditionParser::jump() {
@@ -55,7 +67,6 @@ void conditionParser::loopStarter() {
         std::string line = commandList[i];
         i++;
         if(line.empty()) continue;
-
         interpreter.lexer(line);
         interpreter.parser();
         interpreter.Calculator();

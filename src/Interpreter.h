@@ -24,6 +24,7 @@ std::map<std::string, Expression*> ExpressTable;
 std::vector<std::string> toParse;
 std::queue<std::string> parseQueue;
 std::queue<std::string> parsed;
+std::queue<std::string> updated;
 mapHandler mapH;
 Lexer l;
 Parser p;

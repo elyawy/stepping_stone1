@@ -71,6 +71,14 @@ std::ifstream *mapHandler::getStream() {
     return myfile;
 }
 
+void mapHandler::setUpdated(std::queue<std::string> *update) {
+    updated = update;
+}
+
+std::queue<std::string> *mapHandler::getUpdated() {
+    return updated;
+}
+
 
 
 

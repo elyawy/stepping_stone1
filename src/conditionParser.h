@@ -15,6 +15,7 @@ protected:
     Expression * condition;
     std::map<std::string,Expression*> conditionList;
     Interpreter interpreter;
+    int level;
 public:
     conditionParser();
     void execute() override;

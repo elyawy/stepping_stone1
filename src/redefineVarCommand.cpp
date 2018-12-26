@@ -14,6 +14,7 @@ void redefineVarCommand::execute() {
         }
         double x = mapH.getExpressions()->at(mapH.getparseQueue()->front())->calculate(mapH);
         mapH.getsymblTable()->at(var) = x;
+        if (mapH.getvartobindMap()->count(var) > 0) mapH.getUpdated()->push(var);
         jump();
     }
 }

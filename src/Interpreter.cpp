@@ -19,6 +19,7 @@ void Interpreter::parser() {
 
 Interpreter::Interpreter() {
     mapH.setSymbleMap(&symblTable);
+    mapH.setUpdated(&updated);
     mapH.setvartobindMap(&vartoBindTable);
     mapH.settoParse(&toParse);
     mapH.setExpresssions(&ExpressTable);
@@ -33,9 +34,9 @@ mapHandler *Interpreter::getMapH() {
 void Interpreter::Calculator() {
     mapH.setParsed(&parsed);
     mapH.setparseQueue(&parseQueue);
-
-    mapH.getExpressions()->at(parseQueue.front())->calculate(mapH);
-
+    if (parseQueue.front() != "}") {
+        mapH.getExpressions()->at(parseQueue.front())->calculate(mapH);
+    } else parseQueue.pop();
     mapH.gettoParse()->clear();
     mapH.getTokens()->clear();
 }
