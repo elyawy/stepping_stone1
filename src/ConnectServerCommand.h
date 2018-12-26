@@ -9,12 +9,17 @@
 #include "Command.h"
 
 class ConnectServerCommand: public Command {
+private:
+    bool socketIsOpen = false;
+    int socketServer;
 public:
     void execute() override;
-
+    int connect(std::string ip_num, double port_num);
+    int sendMassage();
     void addMaps(mapHandler &mapHandler1) override;
 
     std::string stringify() override;
+    ~ConnectServerCommand();
 };
 
 
