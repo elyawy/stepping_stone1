@@ -4,14 +4,17 @@
 
 #include "ConnectServerCommand.h"
 #include <stdio.h>
-#include <sys/socket.h>
+#include <errno.h>
 #include <stdlib.h>
-#include <netinet/in.h>
-#include <string.h>
-#include <arpa/inet.h>
-#include <cstring>
-#include <iostream>
 #include <unistd.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <stdarg.h>
+#include <string.h>
+
 
 void ConnectServerCommand::execute() {
  std::string ip_num = this->mapH.getparseQueue()->front();
@@ -20,7 +23,14 @@ void ConnectServerCommand::execute() {
  double port_num = this->mapH.getExpressions()->at(this->mapH.getparseQueue()->front())->calculate(mapH);
  this->mapH.getParsed()->push(this->mapH.getparseQueue()->front());
  this->mapH.getparseQueue()->pop();
- connect(ip_num, port_num);
+ socketServerNum = connect(ip_num, port_num);
+ while (sockIsOpen) {
+  if (!mapH.getUpdated()->empty()) {
+   std::string msg = mapH.getvartobindMap()->at(mapH.getUpdated()->front());
+   double value = mapH.getsymblTable()->at(mapH.getUpdated()->front());
+   sendMassage(msg, value);
+  }
+ }
 }
 
 void ConnectServerCommand::addMaps(mapHandler &mapHandler1) {
@@ -32,55 +42,66 @@ std::string ConnectServerCommand::stringify() {
 }
 
 int ConnectServerCommand::connect(std::string ip_num, double port_num) {
- struct sockaddr_in address{};
- struct sockaddr_in serv_addr{};
- int sock = 0;
- char ip_address [ip_num.length()];
- std::strcpy(ip_address, ip_num.c_str());
+ char hostname[ip_num.length()];
+ strcpy(hostname, ip_num.c_str());
+ struct sockaddr_in serv_addr;
+ struct hostent *hostinfo;
+ int sock;
 
- if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
- {
-  printf("\n Socket creation error \n");
+ sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
+ if (sock < 0) {
+  perror("fgfsconnect/socket");
   return -1;
  }
 
- memset(&serv_addr, '0', sizeof(serv_addr));
+ hostinfo = gethostbyname(hostname);
+ if (hostinfo == NULL) {
+  fprintf(stderr, "fgfsconnect: unknown host: \"%s\"\n", hostname);
+  close(sock);
+  return -2;
+ }
 
  serv_addr.sin_family = AF_INET;
  serv_addr.sin_port = htons(port_num);
+ serv_addr.sin_addr = *(struct in_addr *)hostinfo->h_addr;
 
- // Convert IPv4 and IPv6 addresses from text to binary form
- if(inet_pton(AF_INET, ip_address, &serv_addr.sin_addr)<=0)
- {
-  printf("\nInvalid address/ Address not supported \n");
-  return -1;
+ if (::connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
+  perror("fgfsconnect/connect");
+  close(sock);
+  return -3;
  }
-
- if ( ::connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr))< 0)
- {
-  printf("\nConnection Failed \n");
-  return -1;
+ if (sock < 0) {
+  return EXIT_FAILURE;
  }
- this->socketServer = sock;
- this->socketIsOpen = true;
-
- return 0;
+ sockIsOpen = true;
+ return sock;
 }
 
-int ConnectServerCommand::sendMassage() {
- //convert the message to char*
- char mess_char [message.length()];
- strcpy(mess_char, message.c_str());
+int ConnectServerCommand::sendMassage(std::string message, double value, ...) {
+ std::string finalMsg = "set ";
+ finalMsg.append(message).append(" ").append(std::to_string(value));
+ char msg[finalMsg.length()];
+ strcpy(msg, finalMsg.c_str());
+ va_list va;
+ ssize_t len;
+ char buf[256];
 
- char buffer[1024] = {0};
+ va_start(va, msg);
+ vsnprintf(buf, 256 - 2, msg, va);
+ va_end(va);
+ printf("SEND: \t<%s>\n", buf);
+ strcat(buf, "\015\012");
 
- //sent the message throw the socket
- if(send(this->socketServer , mess_char , strlen(mess_char) , 0 )<0)
-  std::cout<<"ERROR in sending message"<<std::endl;
+ len = write(socketServerNum, buf, strlen(buf));
+ if (len < 0) {
+  perror("fgfswrite");
+  exit(EXIT_FAILURE);
+ }
+ return len;
 }
 
 ConnectServerCommand::~ConnectServerCommand() {
- this->socketIsOpen = false;
- close(this->socketServer);
+ close(socketServerNum);
+ sockIsOpen = false;
 }
 
