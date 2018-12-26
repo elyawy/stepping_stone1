@@ -57,7 +57,7 @@ void Parser::expressionFactory(std::vector<std::string> &toParse) {
             mapH.getExpressions()->emplace(toParse[i], exp);
         } else if (mapH.getTokens()->at(toParse[i]) == KEYWORD && mapH.getExpressions()->count(toParse[i])==0){
             if (toParse[i] == "while" || toParse[i] == "if"){
-                if (mapH.getTokens()->at(toParse[i+2]) != FUNCSTART || mapH.getTokens()->at(toParse[i+1]) != TOEVALUTE) throw "invalid syntax";
+                if (mapH.getTokens()->at(toParse[i+1]) != TOEVALUTE) throw "invalid syntax";
             }
             Expression * exp = keywordSorter(toParse[i]);
             mapH.getExpressions()->emplace(toParse[i], exp);

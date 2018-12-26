@@ -6,7 +6,9 @@
 #include "whileCommand.h"
 
 void whileCommand::execute() {
-    loopInitializer();
+    if (commandList.empty()) {
+        loopInitializer();
+    }
 
     while (checkCondition()){
         loopStarter();

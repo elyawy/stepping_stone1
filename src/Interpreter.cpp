@@ -19,8 +19,7 @@ void Interpreter::parser() {
 
 Interpreter::Interpreter() {
     mapH.setSymbleMap(&symblTable);
-    mapH.setbindtovarMap(&bindtoVarTable);
-    mapH.setbindtovarMap(&vartoBindTable);
+    mapH.setvartobindMap(&vartoBindTable);
     mapH.settoParse(&toParse);
     mapH.setExpresssions(&ExpressTable);
     mapH.setParsed(&parsed);
@@ -37,11 +36,17 @@ void Interpreter::Calculator() {
 
     mapH.getExpressions()->at(parseQueue.front())->calculate(mapH);
 
-
-    std::map<std::string, Expression*>::iterator maper;
-
     mapH.gettoParse()->clear();
     mapH.getTokens()->clear();
 }
+
+void Interpreter::reParse() {
+    while (!parsed.empty()){
+        parseQueue.push(parsed.front());
+        parsed.pop();
+
+    }
+}
+
 
 Interpreter::~Interpreter() = default;

@@ -8,6 +8,10 @@ void redefineVarCommand::execute() {
     std::string var = mapH.getParsed()->back();
     if (mapH.getparseQueue()->front() == "="){
         jump();
+        if (mapH.getparseQueue()->front() == "bind"){
+            mapH.getExpressions()->at(mapH.getparseQueue()->front())->calculate(mapH);
+            return;
+        }
         double x = mapH.getExpressions()->at(mapH.getparseQueue()->front())->calculate(mapH);
         mapH.getsymblTable()->at(var) = x;
         jump();

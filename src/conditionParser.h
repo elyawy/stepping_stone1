@@ -13,6 +13,7 @@ class conditionParser: public Command {
 protected:
     std::vector<std::string> commandList;
     Expression * condition;
+    std::map<std::string,Expression*> conditionList;
     Interpreter interpreter;
 public:
     conditionParser();
@@ -27,6 +28,8 @@ public:
 
     void jump() override;
 
+    void setCommandlist(std::vector<std::string> *commandlist);
+    void setCondition(Expression *exp);
 };
 
 

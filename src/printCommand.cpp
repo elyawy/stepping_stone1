@@ -12,8 +12,7 @@ void printCommand::execute() {
     } else {
         double x = mapH.getExpressions()->at(mapH.getparseQueue()->front())->calculate(mapH);
         std::cout << x << std::endl;
-        mapH.getParsed()->push(mapH.getparseQueue()->front());
-        mapH.getparseQueue()->pop();
+        jump();
     }
 }
 

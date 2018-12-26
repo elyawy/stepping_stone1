@@ -17,4 +17,5 @@ add_executable(stepping_stone1 src/main.cpp src/Command.h src/Expression.h
         src/conditionParser.cpp src/conditionParser.h src/Parser.cpp src/Parser.h
         src/Lexer.cpp src/Lexer.h src/Evaluator.cpp src/Evaluator.h src/varExpression.cpp
         src/varExpression.h src/booleanExpression.cpp src/booleanExpression.h
-        src/quotedExpression.cpp src/quotedExpression.h src/ifCommand.cpp src/ifCommand.h src/redefineVarCommand.cpp src/redefineVarCommand.h)
+        src/quotedExpression.cpp src/quotedExpression.h src/ifCommand.cpp
+        src/ifCommand.h src/redefineVarCommand.cpp src/redefineVarCommand.h)

@@ -4,9 +4,6 @@
 
 #include "mapHandler.h"
 
-std::map<std::string, std::string> *mapHandler::getbindtovarMap() {
-    return bindtoVarTable;
-}
 
 std::map<std::string, std::string> *mapHandler::getvartobindMap() {
     return vartoBindTable;
@@ -24,9 +21,7 @@ void mapHandler::setvartobindMap(std::map<std::string, std::string> *vartoBindTa
  vartoBindTable = vartoBindTable1;
 }
 
-void mapHandler::setbindtovarMap(std::map<std::string, std::string> *bindtoVarTable1) {
- bindtoVarTable = bindtoVarTable1;
-}
+
 
 std::vector<std::string> *mapHandler::gettoParse() {
     return toParse;
@@ -66,6 +61,14 @@ void mapHandler::setparseQueue(std::queue<std::string> *parse1) {
 
 std::queue<std::string> *mapHandler::getparseQueue() {
     return parseQueue;
+}
+
+void mapHandler::setStream(std::ifstream *file) {
+    myfile = file;
+}
+
+std::ifstream *mapHandler::getStream() {
+    return myfile;
 }
 
 

@@ -20,7 +20,6 @@ class Interpreter {
 private:
 std::map<std::string, double> symblTable;
 std::map<std::string, std::string> vartoBindTable;
-std::map<std::string, std::string> bindtoVarTable;
 std::map<std::string, Expression*> ExpressTable;
 std::vector<std::string> toParse;
 std::queue<std::string> parseQueue;
@@ -45,7 +44,8 @@ mapHandler *getMapH();
 
 ~Interpreter();
 
-void setSymblTable();
+
+void reParse();
 
 };
 

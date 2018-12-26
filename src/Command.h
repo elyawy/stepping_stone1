@@ -24,7 +24,10 @@ public:
 
     virtual std::string stringify() = 0;
 
-    virtual void jump(){}
+    virtual void jump(){
+        mapH.getParsed()->push(mapH.getparseQueue()->front());
+        mapH.getparseQueue()->pop();
+    }
 
 };
 

@@ -2,7 +2,9 @@
 // Created by elyawy on 12/18/18.
 //
 
+#include <fstream>
 #include "conditionParser.h"
+#include "whileCommand.h"
 
 void conditionParser::execute() {
 }
@@ -26,12 +28,16 @@ void conditionParser::addMaps(mapHandler &mapHandler1) {
 conditionParser::conditionParser() = default;
 
 void conditionParser::loopInitializer() {
+    if (!commandList.empty()) return;
     condition = mapH.getExpressions()->at(mapH.getparseQueue()->front());
     interpreter.getMapH()->setSymbleMap(mapH.getsymblTable());
     jump();
     std::string line;
+    interpreter.getMapH()->setStream(mapH.getStream());
     do {
-        std::getline(std::cin, line);
+        if (mapH.getStream()->is_open()){
+            std::getline(*mapH.getStream(), line);
+        } else std::getline(std::cin, line);
         if (line.find('}') != std::string::npos) break;
         if(line.empty()) continue;
         commandList.push_back(line);
@@ -49,8 +55,18 @@ void conditionParser::loopStarter() {
         std::string line = commandList[i];
         i++;
         if(line.empty()) continue;
+
         interpreter.lexer(line);
         interpreter.parser();
         interpreter.Calculator();
     }
 }
+
+void conditionParser::setCommandlist(std::vector<std::string> *commandlist) {
+
+}
+
+void conditionParser::setCondition(Expression *exp) {
+
+}
+
