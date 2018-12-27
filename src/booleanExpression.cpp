@@ -14,6 +14,7 @@ double booleanExpression::calculate(mapHandler &mapH) {
     if (compare == "==") return (this->getLeftExp()->calculate(mapH) == this->getRightExp()->calculate(mapH));
     if (compare == ">") return (this->getLeftExp()->calculate(mapH) > this->getRightExp()->calculate(mapH));
     if (compare == "<") return (this->getLeftExp()->calculate(mapH) < this->getRightExp()->calculate(mapH));
+    if (compare == "!=") return (this->getLeftExp()->calculate(mapH) < this->getRightExp()->calculate(mapH));
 
     return 0;
 }

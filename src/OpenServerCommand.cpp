@@ -105,7 +105,7 @@ void OpenServerCommand::connectAndUpdate(int sleepTime, int sockeNum) {
             int i = 1;
             std::string temp;
             iss >> temp;
-            std::cout << temp << "\n";
+//            std::cout << temp << "\n";
             std::string delim = ",";
             auto start = 0U;
             auto end = temp.find(delim);
@@ -141,7 +141,7 @@ void OpenServerCommand::connectAndUpdate(int sleepTime, int sockeNum) {
 int OpenServerCommand::findIndexFromString(std::string const &path) const {
     ptrdiff_t pos = find(this->DirectVar.begin(), this->DirectVar.end(), path) - this->DirectVar.begin();
     if (pos >= this->DirectVar.size()) {
-        perror("PATH NOT FOUND IN VECTOR");
+//        perror("PATH NOT FOUND IN VECTOR");
         return -1;
     }
     return static_cast<int>(pos);

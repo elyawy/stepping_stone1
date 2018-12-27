@@ -113,6 +113,7 @@ void ConnectServerCommand::updateConnection() {
    std::string msg = mapH.getvartobindMap()->at(mapH.getUpdated()->front());
    double value = mapH.getsymblTable()->at(mapH.getUpdated()->front());
    sendMassage(msg, value);
+   mapH.getUpdated()->pop();
   }
  }
 }

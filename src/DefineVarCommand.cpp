@@ -16,6 +16,7 @@ void DefineVarCommand::execute() {
                 mapH.getparseQueue()->pop();
                 if (!mapH.getparseQueue()->empty()){
                     if (mapH.getparseQueue()->front() == "bind") {
+                        mapH.getsymblTable()->emplace(var,0);
                         mapH.getExpressions()->at(mapH.getparseQueue()->front())->calculate(mapH);
                     } else {
                         double x = mapH.getExpressions()->at(mapH.getparseQueue()->front())->calculate(mapH);

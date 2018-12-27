@@ -176,6 +176,10 @@ void Lexer::Words(std::string &line, int &i) {
             i++;
             Printer(line, i);
         }
+        if (temp == "sleep"){
+            i++;
+            Printer(line, i);
+        }
         temp = "";
     } else {
         scanned_list.emplace(temp, VARIABLE);
