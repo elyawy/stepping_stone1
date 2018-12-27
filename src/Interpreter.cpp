@@ -35,7 +35,7 @@ void Interpreter::Calculator() {
     mapH.setParsed(&parsed);
     mapH.setparseQueue(&parseQueue);
     if (parseQueue.front() != "}") {
-        mapH.getExpressions()->at(parseQueue.front())->calculate(mapH);
+      mapH.getExpressions()->at(parseQueue.front())->calculate(mapH);
     } else parseQueue.pop();
     mapH.gettoParse()->clear();
     mapH.getTokens()->clear();

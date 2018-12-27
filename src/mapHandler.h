@@ -10,6 +10,7 @@
 #include <vector>
 #include "Lexer.h"
 #include <queue>
+#include <mutex>
 #include "fstream"
 
 class Expression;

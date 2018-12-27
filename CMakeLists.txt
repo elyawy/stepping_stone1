@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 project(stepping_stone1)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS -pthread)
 
 add_executable(stepping_stone1 src/main.cpp src/Command.h src/Expression.h
         src/Interpreter.h src/Interpreter.cpp

@@ -6,6 +6,7 @@
 #define STEPPING_STONE1_OPENSERVERCOMMAND_H
 
 #include <string>
+#include <thread>
 #include "Command.h"
 
 class OpenServerCommand:public Command{
@@ -32,6 +33,8 @@ class OpenServerCommand:public Command{
                                     "/controls/flight/flaps",
                                     "/controls/engines/engine/throttle",
                                     "/engines/engine/rpm"};
+    std::thread *serverthread; // the connect function's thread.
+    bool flag = false;
 public:
     void execute() override;
 

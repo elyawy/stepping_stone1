@@ -13,8 +13,9 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <thread>
 
-
+static const int num_threads = 2;
 
 class Interpreter {
 private:

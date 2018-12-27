@@ -11,12 +11,12 @@
 #include <netinet/in.h>
 
 #include <cstring>
-
 #include <sys/socket.h>
 #include <sstream>
 #include <iostream>
-#include <thread>
 #include <algorithm>
+#include <thread>
+#include <mutex>
 
 
 void OpenServerCommand::execute() {
@@ -26,6 +26,7 @@ void OpenServerCommand::execute() {
     if (portno == 5400) {
         std::cout << "the server is open!\n";
     }
+    jump();
     int sockfd, newsockfd, clilen;
     struct sockaddr_in serv_addr, cli_addr;
 
@@ -63,9 +64,9 @@ void OpenServerCommand::execute() {
         perror("ERROR on accept");
         exit(1);
     }
-    std::thread fromServer(&OpenServerCommand::connectAndUpdate, this,  sleepTime,  sockfd);
-    fromServer.detach();
 
+    std::thread *fromServer = new std::thread(&OpenServerCommand::connectAndUpdate, this, sleepTime, newsockfd);
+    serverthread = fromServer;
 }
 
 void OpenServerCommand::addMaps(mapHandler &mapHandler1) {
@@ -77,12 +78,19 @@ std::string OpenServerCommand::stringify() {
 }
 
 void OpenServerCommand::connectAndUpdate(int sleepTime, int sockeNum) {
+
+
     char buffer[256];
     double  n;
+
     /* If connection is established then start communicating */
     while (true) {
         bzero(buffer, 256);
+
         n = read(sockeNum, buffer, 255);
+        if(flag){
+            serverthread->detach();
+        }
 
         if (n < 0) {
             perror("ERROR reading from socket");
@@ -139,4 +147,8 @@ int OpenServerCommand::findIndexFromString(std::string const &path) const {
 }
 
 
-OpenServerCommand::~OpenServerCommand() = default;
+OpenServerCommand::~OpenServerCommand(){
+flag = true;
+serverthread->join();
+delete serverthread;
+}

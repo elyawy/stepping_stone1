@@ -27,5 +27,6 @@ int main(int argc, char *argv[]) {
         i.Calculator();
     } while (line.find("exit") == std::string::npos && !myfile.eof());
         myfile.close();
+       // std::cin >> line;
     return 0;
 }
