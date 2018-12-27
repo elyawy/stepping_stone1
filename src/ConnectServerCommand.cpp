@@ -75,7 +75,8 @@ int ConnectServerCommand::connect(std::string ip_num, double port_num) {
 
 int ConnectServerCommand::sendMassage(std::string message, double value, ...) {
  std::string finalMsg = "set ";
- finalMsg.append(message).append(" ").append(std::to_string(value));
+ std::string newmessage(message.begin()+1, message.end()-1);
+ finalMsg.append(newmessage).append(" ").append(std::to_string(value));
  char msg[finalMsg.length()];
  strcpy(msg, finalMsg.c_str());
  va_list va;
