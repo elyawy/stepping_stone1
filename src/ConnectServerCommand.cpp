@@ -24,13 +24,9 @@ void ConnectServerCommand::execute() {
  this->mapH.getParsed()->push(this->mapH.getparseQueue()->front());
  this->mapH.getparseQueue()->pop();
  socketServerNum = connect(ip_num, port_num);
- while (sockIsOpen) {
-  if (!mapH.getUpdated()->empty()) {
-   std::string msg = mapH.getvartobindMap()->at(mapH.getUpdated()->front());
-   double value = mapH.getsymblTable()->at(mapH.getUpdated()->front());
-   sendMassage(msg, value);
-  }
- }
+
+ std::thread *fromServer = new std::thread(&ConnectServerCommand::updateConnection, this);
+ serverthread = fromServer;
 }
 
 void ConnectServerCommand::addMaps(mapHandler &mapHandler1) {
@@ -103,5 +99,23 @@ int ConnectServerCommand::sendMassage(std::string message, double value, ...) {
 ConnectServerCommand::~ConnectServerCommand() {
  close(socketServerNum);
  sockIsOpen = false;
+ flag = true;
+ serverthread->join();
+ delete serverthread;
 }
+
+void ConnectServerCommand::updateConnection() {
+ while (sockIsOpen) {
+  if(flag){
+   break;
+  }
+  if (!mapH.getUpdated()->empty()) {
+   std::string msg = mapH.getvartobindMap()->at(mapH.getUpdated()->front());
+   double value = mapH.getsymblTable()->at(mapH.getUpdated()->front());
+   sendMassage(msg, value);
+  }
+ }
+}
+
+
 
