@@ -93,7 +93,7 @@ int ConnectServerCommand::sendMassage(std::string message, double value, ...) {
   perror("fgfswrite");
   exit(EXIT_FAILURE);
  }
- return len;
+ return (int)len;
 }
 
 ConnectServerCommand::~ConnectServerCommand() {

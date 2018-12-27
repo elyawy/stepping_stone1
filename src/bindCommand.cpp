@@ -3,14 +3,19 @@
 //
 
 #include "bindCommand.h"
+std::mutex mutex2;
 
 
 void bindCommand::execute() {
     int i = 0;
     std::string var;
     while (i < mapH.getParsed()->size()){
-        if (mapH.getTokens()->count(mapH.getParsed()->front()) == VARIABLE){
-            var = mapH.getParsed()->front();
+        if (mapH.getTokens()->count(mapH.getParsed()->front()) > 0){
+            if (mapH.getTokens()->at(mapH.getParsed()->front()) == VARIABLE) {
+                var = mapH.getParsed()->front();
+                mapH.getParsed()->pop();
+                break;
+            }
         }
         mapH.getParsed()->push(mapH.getParsed()->front());
         mapH.getParsed()->pop();

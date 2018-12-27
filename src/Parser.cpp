@@ -17,6 +17,7 @@
 #include "whileCommand.h"
 #include "redefineVarCommand.h"
 #include "ifCommand.h"
+#include "sleepCommand.h"
 
 void Parser::parse(std::vector<std::string> &toParse,std::map<std::string , SECONDSTAGE > *tokenized) {
     tokens = tokenized;
@@ -89,6 +90,8 @@ Expression * Parser::keywordSorter(std::string &keyword) {
     if(keyword == "bind") return new CommandExpression(new bindCommand());
     if(keyword == "while") {return new CommandExpression(new whileCommand());}
     if(keyword == "if") return new CommandExpression(new ifCommand());
+    if(keyword == "sleep") return new CommandExpression(new sleepCommand());
+
 }
 
 
