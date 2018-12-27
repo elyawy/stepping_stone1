@@ -1,3 +1,5 @@
+#include <memory>
+
 //
 // Created by ziv_t on 12/14/18.
 //
@@ -64,7 +66,6 @@ void OpenServerCommand::execute() {
         perror("ERROR on accept");
         exit(1);
     }
-
     std::thread *fromServer = new std::thread(&OpenServerCommand::connectAndUpdate, this, sleepTime, newsockfd);
     serverthread = fromServer;
 }
@@ -89,7 +90,7 @@ void OpenServerCommand::connectAndUpdate(int sleepTime, int sockeNum) {
 
         n = read(sockeNum, buffer, 255);
         if(flag){
-            serverthread->detach();
+            break;
         }
 
         if (n < 0) {
