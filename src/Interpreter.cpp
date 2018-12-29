@@ -36,7 +36,13 @@ void Interpreter::Calculator() {
     mapH.setparseQueue(&parseQueue);
   //  mapH.setParsed(&updated);
     if (parseQueue.front() != "}") {
+        std::string com = parseQueue.front();
       mapH.getExpressions()->at(parseQueue.front())->calculate(mapH);
+        if (com == "openDataServer"){
+            std::cout << "wait for server before connect command and press 'c'" << std::endl;
+            std::string temp;
+            std::cin >> temp;
+        }
     } else parseQueue.pop();
     mapH.gettoParse()->clear();
     mapH.getTokens()->clear();
