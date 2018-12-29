@@ -13,12 +13,17 @@ void redefineVarCommand::execute() {
             mapH.getExpressions()->at(mapH.getparseQueue()->front())->calculate(mapH);
             return;
         }
-        double x = mapH.getExpressions()->at(mapH.getparseQueue()->front())->calculate(mapH);
+        std::string temp = mapH.getparseQueue()->front();
         mtx.lock();
-        mapH.getsymblTable()->at(var) = x;
-        if (mapH.getvartobindMap()->count(var) > 0) mapH.getUpdated()->push(var);
-        mtx.unlock();
-        jump();
+        double x = mapH.getExpressions()->at(mapH.getparseQueue()->front())->calculate(mapH);
+        if (mapH.getsymblTable()->count(var) == 0){
+            mapH.getsymblTable()->emplace(var,x);
+        } else {
+            mapH.getsymblTable()->at(var) = x;
+            if (mapH.getvartobindMap()->count(var) > 0) mapH.getUpdated()->push(var);
+            mtx.unlock();
+            jump();
+        }
     }
 }
 

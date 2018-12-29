@@ -83,7 +83,18 @@ Expression *Evaluator::shuntingYard(std::string &express1) {
                 j--;break;}
         }
     }
-
+    int k = 0;
+    while (k < express.size()){
+        if (express[k] == "-" && k == 0){
+            express.insert(express.begin(), "0");
+        }
+        if (k>0){
+            if (express[k] == "-" && (express[k-1] == "(" || isOperator(express[k-1]))){
+                express.insert(express.begin()+k, "0");
+            }
+        }
+        k++;
+    }
     std::stack<std::string> stack;
     std::queue<std::string> queue;
 

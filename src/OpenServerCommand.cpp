@@ -80,6 +80,7 @@ std::string OpenServerCommand::stringify() {
 
 void OpenServerCommand::connectAndUpdate(int sleepTime, int sockeNum) {
     std::mutex mtx;
+    std::queue<std::string> varQueue;
 
     char buffer[256];
     double  n;
@@ -115,15 +116,27 @@ void OpenServerCommand::connectAndUpdate(int sleepTime, int sockeNum) {
                 start = static_cast<unsigned int>(end + delim.length());
                 end = temp.find(delim, start);
             }
-            std::map<std::string, std::string>::iterator mapIndx;
-            mtx.lock();
-            for (mapIndx = mapH.getvartobindMap()->begin(); mapIndx != mapH.getvartobindMap()->end(); ++mapIndx) {
-                int inxd = findIndexFromString(mapIndx->second);
-                if (inxd != -1) {
-                    mapH.getsymblTable()->at(mapIndx->second) = std::stoi(fromSer.at(inxd));
+            int j = 0;
+            while (j < fromSer.size()){
+                double x = stod(fromSer[j]);
+                std::string path = DirectVar[j];
+                mtx.lock();
+                if (!mapH.getvartobindMap()->empty()) {
+                    std::map<std::string, std::string>::iterator mapIndx;
+                    for(mapIndx = mapH.getvartobindMap()->begin(); mapIndx != mapH.getvartobindMap()->end(); mapIndx++ ){
+                        std::string check((*mapIndx).second.begin()+1,(*mapIndx).second.end()-1);
+                        if (check == path){
+                            varQueue.push((*mapIndx).first);
+                        }
+                    }
+                    while (!varQueue.empty()){
+                        mapH.getsymblTable()->at(varQueue.front()) = x;
+                        varQueue.pop();
+                    }
                 }
+                mtx.unlock();
+                j++;
             }
-            mtx.unlock();
         }
 
         /* Write a response to the client */
@@ -140,14 +153,6 @@ void OpenServerCommand::connectAndUpdate(int sleepTime, int sockeNum) {
     }
 }
 
-int OpenServerCommand::findIndexFromString(std::string const &path) const {
-    ptrdiff_t pos = find(this->DirectVar.begin(), this->DirectVar.end(), path) - this->DirectVar.begin();
-    if (pos >= this->DirectVar.size()) {
-//        perror("PATH NOT FOUND IN VECTOR");
-        return -1;
-    }
-    return static_cast<int>(pos);
-}
 
 
 OpenServerCommand::~OpenServerCommand(){
