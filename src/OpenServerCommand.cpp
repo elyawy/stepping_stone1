@@ -79,7 +79,7 @@ std::string OpenServerCommand::stringify() {
 }
 
 void OpenServerCommand::connectAndUpdate(int sleepTime, int sockeNum) {
-
+    std::mutex mtx;
 
     char buffer[256];
     double  n;
@@ -116,12 +116,14 @@ void OpenServerCommand::connectAndUpdate(int sleepTime, int sockeNum) {
                 end = temp.find(delim, start);
             }
             std::map<std::string, std::string>::iterator mapIndx;
+            mtx.lock();
             for (mapIndx = mapH.getvartobindMap()->begin(); mapIndx != mapH.getvartobindMap()->end(); ++mapIndx) {
                 int inxd = findIndexFromString(mapIndx->second);
                 if (inxd != -1) {
                     mapH.getsymblTable()->at(mapIndx->second) = std::stoi(fromSer.at(inxd));
                 }
             }
+            mtx.unlock();
         }
 
         /* Write a response to the client */

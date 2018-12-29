@@ -30,6 +30,8 @@ conditionParser::conditionParser() = default;
 void conditionParser::loopInitializer() {
     condition = mapH.getExpressions()->at(mapH.getparseQueue()->front());
     interpreter.getMapH()->setSymbleMap(mapH.getsymblTable());
+    interpreter.getMapH()->setUpdated(mapH.getUpdated());
+    interpreter.getMapH()->setvartobindMap(mapH.getvartobindMap());
 
     jump();
     std::string line;

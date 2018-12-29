@@ -7,6 +7,7 @@ std::mutex mutex2;
 
 
 void bindCommand::execute() {
+    std::mutex  mtx;
     int i = 0;
     std::string var;
     while (i < mapH.getParsed()->size()){
@@ -21,6 +22,7 @@ void bindCommand::execute() {
         mapH.getParsed()->pop();
     }
     if (mapH.getTokens()->at(mapH.getparseQueue()->front()) == QUOTED){
+        mtx.lock();
         if (mapH.getvartobindMap()->count(var) > 0) {
             mapH.getvartobindMap()->erase(var);
             mapH.getvartobindMap()->emplace(var, mapH.getparseQueue()->front());
@@ -29,12 +31,14 @@ void bindCommand::execute() {
             mapH.getvartobindMap()->emplace(var, mapH.getparseQueue()->front());
             jump();
         }
-
+        mtx.unlock();
     } else {
+        mtx.lock();
         if (mapH.getvartobindMap()->count(mapH.getparseQueue()->front()) >0){
             std::string bind = mapH.getvartobindMap()->at(mapH.getparseQueue()->front());
             mapH.getvartobindMap()->emplace(var, bind);
             jump();
+            mtx.unlock();
         } else {
             jump();
             return;

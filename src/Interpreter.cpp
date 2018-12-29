@@ -34,6 +34,7 @@ mapHandler *Interpreter::getMapH() {
 void Interpreter::Calculator() {
     mapH.setParsed(&parsed);
     mapH.setparseQueue(&parseQueue);
+  //  mapH.setParsed(&updated);
     if (parseQueue.front() != "}") {
       mapH.getExpressions()->at(parseQueue.front())->calculate(mapH);
     } else parseQueue.pop();

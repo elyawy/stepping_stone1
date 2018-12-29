@@ -106,16 +106,19 @@ ConnectServerCommand::~ConnectServerCommand() {
 }
 
 void ConnectServerCommand::updateConnection() {
+ std::mutex mtx;
  while (sockIsOpen) {
   if(flag){
    break;
   }
+  mtx.lock();
   if (!mapH.getUpdated()->empty()) {
    std::string msg = mapH.getvartobindMap()->at(mapH.getUpdated()->front());
    double value = mapH.getsymblTable()->at(mapH.getUpdated()->front());
    sendMassage(msg, value);
    mapH.getUpdated()->pop();
   }
+  mtx.unlock();
  }
 }
 

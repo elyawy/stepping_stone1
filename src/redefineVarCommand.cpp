@@ -5,6 +5,7 @@
 #include "redefineVarCommand.h"
 
 void redefineVarCommand::execute() {
+    std::mutex mtx;
     std::string var = mapH.getParsed()->back();
     if (mapH.getparseQueue()->front() == "="){
         jump();
@@ -13,8 +14,10 @@ void redefineVarCommand::execute() {
             return;
         }
         double x = mapH.getExpressions()->at(mapH.getparseQueue()->front())->calculate(mapH);
+        mtx.lock();
         mapH.getsymblTable()->at(var) = x;
         if (mapH.getvartobindMap()->count(var) > 0) mapH.getUpdated()->push(var);
+        mtx.unlock();
         jump();
     }
 }

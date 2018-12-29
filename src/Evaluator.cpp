@@ -73,7 +73,9 @@ Expression *Evaluator::shuntingYard(std::string &express1) {
         while (isdigit(express1[j])){
             temp += express1[j];
             j++;
-            if (express1[j] == '.') {temp += express1[j];
+            if (express1[j] == '.') {
+                temp += express1[j];
+                j++;
                 continue;
             }
             if (!isdigit(express1[j]) && !temp.empty()) {
