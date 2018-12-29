@@ -62,7 +62,7 @@ Expression *Evaluator::shuntingYard(std::string &express1) {
                 temp += express1[j];
                 j++;
                 check+= express1[j];
-            if (express1[j] == ' ' || isOperator(check) || j >= express1.size()) {express.push_back(temp);temp = "";break;}
+            if (express1[j] == ' ' || isOperator(check) || j >= express1.size() || check == ")") {express.push_back(temp);temp = "";break;}
         } if (j >= express1.size()) break;
         }
         if (express1[j] == ' ') continue;
@@ -97,6 +97,7 @@ Expression *Evaluator::shuntingYard(std::string &express1) {
     }
     std::stack<std::string> stack;
     std::queue<std::string> queue;
+
 
     // shunting yard algorithm.
     while (i < express.size()){
